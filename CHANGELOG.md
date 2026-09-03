@@ -1,55 +1,55 @@
-# Journal des modifications
+# Changelog
 
-Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
-Ce fichier sert au dépôt et à rédiger les notes de version Steam ; RimWorld ne l'affiche pas en jeu.
+Format inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+This file serves the repository and the Steam release notes; RimWorld does not display it in game.
 
-## [1.0.0] — non publié
+## [1.0.0] — unreleased
 
-Première version. RimWorld 1.6. Exige **Odyssey** (pour le portant à vêtements) et **Harmony**.
+First release. RimWorld 1.6. Requires **Odyssey** (for the outfit stand) and **Harmony**.
 
-### Le changement du soir
+### The evening change
 
-- Un colon qui part se coucher de lui-même s'arrête au portant de sa chambre, enfile ce qui y est
-  accroché, et va dormir. Ses habits de jour attendent dans le portant et lui reviennent à
-  l'identique, marqueurs de port forcé compris.
-- Un portant sans propriétaire assigné sert celui à qui appartient un lit de la même pièce : une
-  chambre privée ne demande aucun réglage. Le gizmo « Choisir le dormeur » sert aux dortoirs, où
-  plusieurs colons pourraient sinon prétendre au même portant.
-- Le changement complet est le comportement par défaut, et non une option : un pyjama remplace les
-  habits, il ne se porte pas par-dessus.
+- A colonist going to bed of their own accord stops at the stand in their bedroom, puts on whatever
+  is hanging there, and goes to sleep. Their day clothes wait in the stand and come back exactly as
+  they were, force-worn markers included.
+- A stand with no owner set serves whoever owns a bed in the same room, so a private bedroom needs
+  no setup. The "Set sleeper" gizmo is for barracks, where several colonists could otherwise lay
+  claim to the same stand.
+- A full change is the behaviour, not an option: night clothes replace what is worn, they do not
+  layer over it.
 
-### Le retour du matin
+### The morning return
 
-- Posé sur `Humanlike_PreMain` : après la zone autorisée, la température vitale, le travail
-  d'urgence et l'optimiseur vestimentaire, avant le travail ordinaire et les loisirs. Un incendie
-  passe avant le pantalon ; le pantalon passe avant l'établi.
-- Tant que l'emploi du temps dit « sommeil », le colon reste en pyjama : un casse-croûte nocturne ne
-  déclenche pas trois trajets au portant.
-- Personne n'est tiré du lit. La télévision au lit, la méditation couchée et le repos médical
-  laissent la tenue de nuit en place.
-- Un bouton « Se rhabiller maintenant » sur le portant, pour forcer le retour.
+- Placed on `Humanlike_PreMain`: after the allowed area, safe temperature, emergency work and the
+  apparel optimizer; before ordinary work and recreation. A fire comes before the trousers; the
+  trousers come before the workbench.
+- While the timetable says "sleep", the colonist stays in night clothes: a midnight snack does not
+  trigger three trips to the stand.
+- Nobody is pulled out of bed. Television in bed, meditating lying down and medical rest all leave
+  the night clothes on.
+- A "Change back now" button on the stand, to force the return.
 
-### Le garde-froid
+### The cold guard
 
-- Le mod compare l'isolation de la tenue de nuit à celle des habits déposés, applique la différence
-  au minimum confortable du colon, et refuse le changement si la chambre est plus froide. Marge
-  réglable, garde désactivable.
+- The mod compares the insulation of the night clothes against that of the day clothes being
+  parked, applies the difference to the colonist's comfortable minimum, and refuses the change if
+  the bedroom is colder. Adjustable margin, and the guard can be turned off.
 
-### Ce qu'il refuse de faire
+### What it refuses to do
 
-- Un ordre direct de se coucher n'est jamais retardé par un détour.
-- Le repos médical n'est pas touché.
-- Aucun changement pendant un raid ou un incendie ; le retour, lui, reste permis, un colon qui
-  quitte son pyjama marchant vers son propre équipement.
+- A direct order to lie down is never delayed by a detour.
+- Medical rest is left alone.
+- No changing during a raid or a fire; the return trip stays allowed, a colonist leaving their
+  night clothes being a colonist walking toward their own gear.
 
-### Cohabitation
+### Living alongside other mods
 
-- Clés de scribe préfixées et liaison de raccourci retirée, pour partager le def du portant avec
-  Shift Change et Outfit Stands Plus.
-- Le portant pour enfants de Biotech est traité comme le portant ordinaire.
+- Mod-prefixed scribe keys and no hotkey binding, so the stand def can be shared with Shift Change
+  and Outfit Stands Plus.
+- Biotech's kid outfit stand is treated like the ordinary one.
 
-### Réglages
+### Settings
 
-- Un portant libre sert le propriétaire du lit (activé).
-- Refuser le changement si la chambre est trop froide (activé), avec marge en degrés.
-- Distance maximale entre le lit et le portant.
+- Unassigned stands serve the bed's owner (on).
+- Refuse the change when the bedroom is too cold (on), with a margin in degrees.
+- Maximum distance between bed and stand.

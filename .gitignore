@@ -18,3 +18,7 @@ Source/bin/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Internal art brief, kept out of the public repository: it is a working note in French,
+# and the repository documentation is English.
+PROMPT_*.md

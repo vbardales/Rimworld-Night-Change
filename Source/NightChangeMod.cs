@@ -10,21 +10,21 @@ namespace NightChange
     public class NightChangeSettings : ModSettings
     {
         /// <summary>
-        /// Un portant sans proprietaire assigne sert le proprietaire du lit de la piece. Decoche,
-        /// il ne sert que les pions explicitement assignes.
+        /// A stand with no owner set serves whoever owns a bed in the same room. Unticked, it
+        /// serves only pawns assigned to it explicitly.
         /// </summary>
         public bool inheritOwnerFromBed = true;
 
         /// <summary>
-        /// Refuse le changement quand la tenue de nuit isole moins que les habits de jour et que la
-        /// chambre est trop froide pour la difference. Voir <see cref="TemperatureGuard"/>.
+        /// Refuse the change when the night clothes insulate less than the day clothes and the
+        /// bedroom is too cold for the difference. See <see cref="TemperatureGuard"/>.
         /// </summary>
         public bool coldGuard = true;
 
-        /// <summary>Marge de securite du garde-froid, en degres.</summary>
+        /// <summary>Safety margin of the cold guard, in degrees.</summary>
         public float coldGuardMargin = 2f;
 
-        /// <summary>Distance maximale, en cases, entre le lit et le portant.</summary>
+        /// <summary>Maximum distance, in cells, between the bed and the stand.</summary>
         public int maxStandDistance = 12;
 
         public override void ExposeData()
@@ -75,10 +75,9 @@ namespace NightChange
     }
 
     /// <summary>
-    /// Interrupteur de securite. Ce mod se greffe sur <c>Pawn_JobTracker.StartJob</c>, c'est-a-dire
-    /// sur le demarrage de <b>tous</b> les jobs de <b>tous</b> les pions : une exception non
-    /// rattrapee la-dedans, et la colonie est bloquee. Chaque greffe rattrape, journalise une seule
-    /// fois, se desactive pour la session, et laisse le vanilla continuer.
+    /// The safety switch. This mod hooks <c>Pawn_JobTracker.StartJob</c>, which is the start of
+    /// <b>every</b> job of <b>every</b> pawn: an unhandled exception in there is a bricked colony.
+    /// Every hook catches, logs once, disables the mod for the session, and lets vanilla proceed.
     /// </summary>
     public static class FailOpen
     {
@@ -92,8 +91,8 @@ namespace NightChange
             }
 
             Disabled = true;
-            Log.Error($"[Night Change] Erreur dans {where}. Le mod se desactive pour cette session "
-                      + $"et laisse le jeu poursuivre normalement.\n{ex}");
+            Log.Error($"[Night Change] Error in {where}. The mod disables itself for this session "
+                      + $"and lets the game carry on as normal.\n{ex}");
         }
     }
 

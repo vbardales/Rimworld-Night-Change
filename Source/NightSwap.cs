@@ -7,33 +7,32 @@ using Verse.AI;
 namespace NightChange
 {
     /// <summary>
-    /// Ce qu'un passage au portant deplacerait, pour ce pion, dans ce sens.
+    /// What a trip to the stand would move, for this pawn, in this direction.
     /// </summary>
     /// <remarks>
-    /// La question « ce trajet vaut-il la peine ? » et la question « qu'est-ce que je deplace en
-    /// arrivant ? » sont posees a deux endroits differents -- par le selecteur de portant et par le
-    /// pilote de job. Deux implementations divergent : le selecteur finit par retenir un portant
-    /// dont le pion ne peut rien porter, le pion y va, et ne change rien. Une seule autorite, donc,
-    /// et <see cref="Wearability"/> n'est appelee que d'ici.
+    /// "Is this trip worth taking?" and "what do I move on arrival?" are asked in two different
+    /// places - by the stand selector and by the job driver. Two implementations diverge: the
+    /// selector ends up picking a stand holding nothing the pawn can wear, the pawn walks there,
+    /// and moves nothing. So there is one authority, and <see cref="Wearability"/> is called from
+    /// here and nowhere else.
     /// </remarks>
     public class SwapPlan
     {
-        /// <summary>Ce que le pion va enfiler (actuellement dans le portant, ou porte sur lui).</summary>
+        /// <summary>What the pawn will put on (currently in the stand, or worn).</summary>
         public List<Apparel> ToWear = new List<Apparel>();
 
-        /// <summary>Ce qu'il va deposer dans le portant.</summary>
+        /// <summary>What they will park in the stand.</summary>
         public List<Apparel> ToPark = new List<Apparel>();
 
         public bool MovesAnything => ToWear.Count > 0 || ToPark.Count > 0;
 
         /// <summary>
-        /// Aller : le pion prend la tenue de nuit et depose ses habits de jour.
+        /// Outbound: the pawn takes the night clothes and parks their day clothes.
         /// </summary>
         /// <remarks>
-        /// Contrairement a une blouse de laboratoire, un pyjama <b>remplace</b> les habits, il ne se
-        /// porte pas par-dessus. On depose donc tout ce qui n'est pas verrouille, pas seulement ce
-        /// qui entre en conflit. C'est aussi ce qui rend <see cref="TemperatureGuard"/> necessaire :
-        /// se coucher deshabille dans une chambre a -5 degres tue.
+        /// Unlike a lab coat, night clothes <b>replace</b> what is worn rather than layering over
+        /// it. So everything unlocked is parked, not only what conflicts. That is also what makes
+        /// <see cref="TemperatureGuard"/> necessary: going to bed undressed in a room at -5 kills.
         /// </remarks>
         public static SwapPlan ForDressing(Pawn pawn, Building_OutfitStand stand)
         {
@@ -54,9 +53,9 @@ namespace NightChange
                 return null;
             }
 
-            // Le portant ne tient structurellement qu'une tenue (HasRoomForApparelOfDef refuse tout
-            // ce qui ne se porte pas avec ce qu'il contient deja), mais un autre mod peut avoir
-            // elargi le filtre : on ne retient que ce qui se porte ensemble.
+            // A stand is one outfit's worth, structurally (HasRoomForApparelOfDef refuses anything
+            // that cannot be worn together with what is already inside), but another mod may have
+            // widened the filter: keep only what can be worn together.
             for (int i = plan.ToWear.Count - 1; i >= 1; i--)
             {
                 for (int j = 0; j < i; j++)
@@ -74,12 +73,12 @@ namespace NightChange
         }
 
         /// <summary>
-        /// Retour : le pion reprend ce qu'il avait depose et rend ce qu'il avait pris.
+        /// Return trip: the pawn takes back what they parked and gives back what they took.
         /// </summary>
         /// <remarks>
-        /// Construit depuis le grand livre, jamais depuis le proprietaire assigne : le portant a pu
-        /// etre reassigne pendant la nuit. On ne garde que les pieces encore la ou le livre les dit
-        /// -- le joueur a pu ejecter un vetement, ou le pion se faire desaper par un raid.
+        /// Built from the ledger, never from the assigned owner: the stand may have been
+        /// reassigned overnight. Only the pieces still where the ledger says they are count - the
+        /// player may have ejected a garment, or a raid stripped the pawn.
         /// </remarks>
         public static SwapPlan ForUndressing(Pawn pawn, CompNightStand comp)
         {
@@ -131,7 +130,7 @@ namespace NightChange
     }
 
     /// <summary>
-    /// Le portant qui sert de penderie de chambre, s'il y en a un.
+    /// The stand that serves as the bedroom wardrobe, if there is one.
     /// </summary>
     public static class StandFinder
     {
@@ -184,10 +183,10 @@ namespace NightChange
         }
 
         /// <summary>
-        /// Un portant assigne ne sert que ses proprietaires. Un portant libre sert le proprietaire
-        /// du lit de la piece -- c'est le cas courant, une chambre, et il ne demande aucun reglage.
-        /// En dortoir, plusieurs pions peuvent pretendre au meme portant : le premier arrive le
-        /// prend, les autres vont se coucher habilles. C'est ce que l'assignation explicite regle.
+        /// An assigned stand serves only its owners. A free stand serves whoever owns a bed in the
+        /// room - the common case, a bedroom, and it needs no setup at all. In a barracks several
+        /// pawns may lay claim to the same stand: first come, first served, and the rest go to bed
+        /// dressed. That is what explicit assignment fixes.
         /// </summary>
         private static bool Serves(CompNightStand comp, Pawn pawn, Building_Bed bed)
         {
@@ -213,13 +212,14 @@ namespace NightChange
     }
 
     /// <summary>
-    /// Refuse le deshabillage quand la chambre est trop froide pour la tenue de nuit.
+    /// Refuses the change when the bedroom is too cold for the night clothes.
     /// </summary>
     /// <remarks>
-    /// <c>ComfyTemperatureMin</c> lu sur le pion tient deja compte de ce qu'il porte. On lui
-    /// applique donc la <b>difference</b> d'isolation entre ce qu'il va enfiler et ce qu'il depose,
-    /// et on compare a la temperature de la case du lit. Le vanilla ne protege pas de ca : rien
-    /// n'empeche un colon de dormir nu par -20, c'est simplement que rien ne l'y envoie.
+    /// <c>ComfyTemperatureMin</c> read on the pawn already accounts for what they are wearing. So
+    /// the <b>difference</b> in insulation between what they will put on and what they park is
+    /// applied to it, and compared against the temperature of the bed's cell. Vanilla does not
+    /// protect against this: nothing stops a colonist sleeping naked at -20, it is simply that
+    /// nothing normally sends them there.
     /// </remarks>
     public static class TemperatureGuard
     {

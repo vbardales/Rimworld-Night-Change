@@ -6,28 +6,29 @@ using Verse.AI;
 namespace NightChange
 {
     /// <summary>
-    /// Le retour : le pion est debout, en pyjama, et sa journee commence.
+    /// The return trip: the pawn is up, in night clothes, and their day is starting.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Contrairement a l'aller, le retour est un <b>JobGiver</b> pose dans l'arbre de decision, et
-    /// non un prefixe de <c>StartJob</c>. La raison tient en une phrase : depuis <c>StartJob</c>, il
-    /// est impossible de savoir de facon fiable si le pion reste couche. <c>pawn.jobs.posture</c>
-    /// n'est remis a zero par aucun code du <c>Pawn_JobTracker</c> -- il reste a
-    /// <c>LayingInBed</c> jusqu'a ce qu'un toil du <i>nouveau</i> job en decide autrement. Un pion
-    /// qui regarde la television au lit ou qui medite couche demarre bel et bien de nouveaux jobs,
-    /// et le prefixe l'aurait tire hors du lit pour se rhabiller.
+    /// Unlike the outbound trip, the return is a <b>JobGiver</b> placed in the think tree rather
+    /// than a prefix on <c>StartJob</c>. The reason fits in one sentence: from <c>StartJob</c> it
+    /// is impossible to tell reliably whether the pawn is staying in bed.
+    /// <c>pawn.jobs.posture</c> is reset by no code in <c>Pawn_JobTracker</c> - it stays at
+    /// <c>LayingInBed</c> until a toil of the <i>new</i> job decides otherwise. A colonist watching
+    /// television in bed or meditating lying down does start new jobs, and the prefix would have
+    /// pulled them out of bed to get dressed.
     /// </para>
     /// <para>
-    /// Dans l'arbre, le probleme disparait : la branche « il faut rester couche »
-    /// (<c>ThinkNode_ConditionalMustKeepLyingDown</c>) est tout en haut et court-circuite tout le
-    /// reste. Un JobGiver n'est donc consulte que par un pion qui se leve pour de bon.
+    /// In the think tree the problem disappears: the "must keep lying down" branch
+    /// (<c>ThinkNode_ConditionalMustKeepLyingDown</c>) sits at the very top and short-circuits
+    /// everything else. A JobGiver is therefore only consulted by a pawn who is getting up for
+    /// good.
     /// </para>
     /// <para>
-    /// Insere sur <c>Humanlike_PreMain</c>, juste avant le coeur du comportement de colon : donc
-    /// <b>apres</b> la zone autorisee, la temperature vitale, le travail d'urgence et l'optimiseur
-    /// vestimentaire, et <b>avant</b> le travail ordinaire et les loisirs. Un incendie passe avant
-    /// le pantalon ; le pantalon passe avant la table de menuiserie.
+    /// Inserted on <c>Humanlike_PreMain</c>, just before the colonist behaviour core: so
+    /// <b>after</b> the allowed area, safe temperature, emergency work and the apparel optimizer,
+    /// and <b>before</b> ordinary work and recreation. A fire comes before the trousers; the
+    /// trousers come before the carpentry bench.
     /// </para>
     /// </remarks>
     public class JobGiver_ChangeBack : ThinkNode_JobGiver
@@ -53,36 +54,35 @@ namespace NightChange
                     return null;
                 }
 
-                // Un blesse reste au lit : le repos medical est plus bas dans l'arbre que nous, il
-                // ne se defendrait pas tout seul.
+                // An injured pawn stays in bed: medical rest sits lower in the tree than we do, so
+                // it would not defend itself.
                 if (HealthAIUtility.ShouldSeekMedicalRest(pawn))
                 {
                     return null;
                 }
 
-                // Tant que l'emploi du temps dit « sommeil », la nuit n'est pas finie. Sans cette
-                // porte, un colon qui se leve grignoter a deux heures du matin se rhabille de pied
-                // en cap, mange, et repasse au portant pour se recoucher -- trois trajets pour un
-                // casse-croute. L'emploi du temps par defaut du jeu dort de 22 h a 5 h, donc la
-                // regle mord des la premiere partie, sans rien regler.
+                // While the timetable says "sleep", the night is not over. Without this gate, a
+                // colonist getting up for a snack at two in the morning dresses head to toe, eats,
+                // and goes back to the stand to turn in - three trips for a midnight snack. The
+                // game's default timetable sleeps from 22h to 5h, so the rule bites in the very
+                // first colony, with nothing to configure.
                 if (pawn.timetable?.CurrentAssignment == TimeAssignmentDefOf.Sleep)
                 {
                     return null;
                 }
 
-                // Filet anti-boucle. Si le job de coucher differe echoue en boucle (lit pris,
-                // chemin coupe), le pion pourrait se changer, echouer, se rechanger, indefiniment.
+                // Anti-loop net. If the deferred bed job fails repeatedly (bed taken, path cut),
+                // the pawn could change, fail, change back, forever.
                 if (NightChangeTracker.Current.ChangedRecently(pawn))
                 {
                     return null;
                 }
 
-                // Danger volontairement ignore ici. Se changer <i>en</i> tenue est un detour que
-                // personne ne devrait prendre en plein raid ; se changer <i>hors</i> de la tenue est
-                // un pion qui marche vers son propre equipement. Shift Change a appris cette
-                // difference en jeu : quatre colons ont passe un raid en tenue de soiree, leur
-                // gilet pare-balles gare dans le portant, et la porte censee les proteger etait la
-                // raison pour laquelle ils ne pouvaient pas aller le rechercher.
+                // Danger is deliberately ignored here. Changing <i>into</i> night clothes is a
+                // detour nobody should take mid-raid; changing <i>out</i> of them is a pawn moving
+                // toward their own gear. Shift Change learned that difference in play: four
+                // colonists spent a raid in evening dress with their flak vests parked in a stand,
+                // and the gate meant to protect them was the reason they could not go and get them.
                 if (!pawn.CanReserveAndReach(comp.parent, PathEndMode.InteractionCell, Danger.Deadly))
                 {
                     return null;
@@ -91,8 +91,8 @@ namespace NightChange
                 SwapPlan plan = SwapPlan.ForUndressing(pawn, comp);
                 if (plan == null)
                 {
-                    // Plus rien a rendre ni a reprendre : le joueur a vide le portant, ou un raid a
-                    // desape le pion. Le grand livre ment, on le ferme.
+                    // Nothing left to give back or take back: the player emptied the stand, or a
+                    // raid stripped the pawn. The ledger is lying, so we close it.
                     comp.NotifyUndressed();
                     return null;
                 }

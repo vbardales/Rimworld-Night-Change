@@ -8,31 +8,31 @@ using Verse.AI;
 namespace NightChange
 {
     /// <summary>
-    /// Ce que le portant vanilla ne sait pas : <b>a qui</b> sont les vetements qu'il contient.
+    /// What the vanilla stand does not know: <b>whose</b> the clothes inside are.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Le portant d'Odyssey (<see cref="Building_OutfitStand"/>) est un sac indifferencie : il
-    /// scribe son contenu, ses reglages de stockage et son interrupteur, rien de plus. Son propre
-    /// <c>JobDriver_UseOutfitStand</c> distribue tout ce qui est portable au premier venu et
-    /// repousse les habits deplaces dans le meme sac -- deux pions qui partagent un portant
-    /// repartent dans les habits l'un de l'autre. Inutilisable comme trajet retour.
+    /// Odyssey's <see cref="Building_OutfitStand"/> is an undifferentiated bag: it scribes its
+    /// container, its storage settings and its toggle, nothing else. Its own
+    /// <c>JobDriver_UseOutfitStand</c> hands every wearable item to whoever arrives and pushes
+    /// their displaced clothes back into the same bag, so two pawns sharing one stand walk off in
+    /// each other's clothes. Unusable as a return trip.
     /// </para>
     /// <para>
-    /// Ce comp ajoute les deux choses manquantes : une <b>assignation</b> (la machinerie des lits
-    /// et des trones, gratuite en XML) et un <b>grand livre</b> -- qui a emprunte, ce qu'il a
-    /// depose, ce qu'il a pris, et lesquels de ses habits deposes etaient portes de force.
+    /// This comp adds the two missing things: <b>ownership</b> (the machinery beds and thrones
+    /// use, free from XML) and a <b>ledger</b> - who borrowed, what they parked, what they took,
+    /// and which of the parked garments were force-worn at check-in.
     /// </para>
     /// <para>
-    /// <b>Le grand livre dit la verite, pas l'assignation.</b> Reconstruire le trajet retour depuis
-    /// le proprietaire assigne serait faux des qu'un portant est reassigne pendant la nuit.
+    /// <b>The borrower, not the owner, is the ledger's truth.</b> Rebuilding the return trip from
+    /// the assigned owner would be wrong the moment a stand is reassigned overnight.
     /// </para>
     /// <para>
-    /// <b>Cles de scribe prefixees.</b> Les comps s'ecrivent a plat dans le noeud de sauvegarde de
-    /// l'objet. Deux sous-classes de <see cref="CompAssignableToPawn"/> posees sur le meme def --
-    /// c'est exactement le cas quand Shift Change est installe -- ecriraient toutes deux
-    /// <c>assignedPawns</c> et se reliraient l'une l'autre au chargement. D'ou
-    /// <see cref="PostExposeData"/> qui <b>n'appelle pas</b> la base et prefixe tout.
+    /// <b>Mod-prefixed scribe keys.</b> Comps scribe flat into the thing's save node. Two
+    /// subclasses of <see cref="CompAssignableToPawn"/> on the same def - exactly the case when
+    /// Shift Change is installed - would both write <c>assignedPawns</c> and cross-read each other
+    /// on load. Hence <see cref="PostExposeData"/>, which <b>does not</b> call the base and
+    /// prefixes everything.
     /// </para>
     /// </remarks>
     public class CompNightStand : CompAssignableToPawn
@@ -42,7 +42,7 @@ namespace NightChange
         private List<Apparel> taken = new List<Apparel>();
         private List<Apparel> parkedForced = new List<Apparel>();
 
-        /// <summary>Vrai quand le portant tient les habits de jour de quelqu'un.</summary>
+        /// <summary>True while the stand holds somebody's day clothes.</summary>
         public bool InUse => borrower != null;
 
         public Pawn Borrower => borrower;
@@ -73,11 +73,11 @@ namespace NightChange
         protected override string GetAssignmentGizmoDesc() => "NightChange_AssignGizmoDesc".Translate();
 
         /// <summary>
-        /// La base cable son gizmo sur <c>KeyBindingDefOf.Misc4</c>, c'est-a-dire <b>N</b>. Anodin
-        /// sur un lit ; le portant, lui, est un batiment de <b>stockage</b>, et le presse-papier des
-        /// reglages de stockage lie la copie a ce meme Misc4. Reutiliser un comp vanilla sur une
-        /// categorie de batiment ou il n'a jamais servi peut importer une collision de raccourci.
-        /// On retire la liaison, on ne touche pas au reste.
+        /// The base comp hardcodes its gizmo to <c>KeyBindingDefOf.Misc4</c>, which is <b>N</b>.
+        /// Harmless on beds. The outfit stand, however, is a <b>storage</b> building, and the
+        /// storage settings clipboard binds copy to that same Misc4. Reusing a vanilla comp on a
+        /// building category it never shipped on can import a hotkey collision. We strip the
+        /// binding and touch nothing else.
         /// </summary>
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
@@ -112,7 +112,7 @@ namespace NightChange
             };
         }
 
-        // ------------------------------------------------------------------ grand livre
+        // ------------------------------------------------------------------ the ledger
 
         public void NotifyDressed(Pawn pawn, List<Apparel> parkedApparel, List<Apparel> takenApparel,
             List<Apparel> forcedAtCheckIn)
@@ -134,10 +134,10 @@ namespace NightChange
         }
 
         /// <summary>
-        /// Un portant demonte ou detruit rend ses habits par la voie vanilla (le contenu tombe au
-        /// sol), mais le grand livre, lui, continuerait a nommer un emprunteur. On le vide, sinon le
-        /// pion reste marque « en pyjama » et le prefixe le renvoie indefiniment vers un portant qui
-        /// n'existe plus.
+        /// A stand that is uninstalled or destroyed returns its clothes the vanilla way (the
+        /// contents drop on the floor), but the ledger would go on naming a borrower. We empty it,
+        /// or the pawn stays flagged as being in night clothes and the prefix keeps sending them
+        /// back to a stand that no longer exists.
         /// </summary>
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
@@ -149,10 +149,10 @@ namespace NightChange
         }
 
         /// <summary>
-        /// Libere le portant quand le vanilla considere que la propriete cesse : mort, capture,
-        /// vente, sortie de carte, bannissement. Volontairement <b>eager</b> : un portant qui se
-        /// contente de ne plus croire un grand livre nommant un pion parti y recroit des qu'il est
-        /// recrute a nouveau, puisque le livre n'a jamais ete vide.
+        /// Frees the stand when vanilla considers ownership to end: death, capture, trade, map
+        /// exit, banishment. Deliberately <b>eager</b>: a stand that merely disbelieves a ledger
+        /// naming a departed pawn believes it again the moment that pawn is recruited back,
+        /// because the ledger was never emptied.
         /// </summary>
         public void Reap(Pawn pawn)
         {
@@ -171,7 +171,7 @@ namespace NightChange
 
         public override void PostExposeData()
         {
-            // Volontairement sans base.PostExposeData() : voir la note de classe sur les cles.
+            // Deliberately without base.PostExposeData(): see the class note on scribe keys.
             Scribe_Collections.Look(ref assignedPawns, "NightChange_assignedPawns", LookMode.Reference);
             Scribe_Collections.Look(ref uninstalledAssignedPawns, "NightChange_uninstalledAssignedPawns",
                 LookMode.Reference);

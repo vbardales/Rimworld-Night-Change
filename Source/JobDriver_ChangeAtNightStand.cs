@@ -7,12 +7,13 @@ using Verse.AI;
 namespace NightChange
 {
     /// <summary>
-    /// Le passage au portant, dans un sens ou dans l'autre.
+    /// The trip to the stand, in either direction.
     /// </summary>
     /// <remarks>
-    /// Le sens n'est pas dans le job : il se lit sur le grand livre a l'arrivee. Si le portant tient
-    /// deja les habits de ce pion, c'est un retour ; sinon c'est un depart. Un job scribe qui
-    /// reprend apres un chargement retrouve donc toujours le bon sens, sans champ supplementaire.
+    /// The direction is not carried in the job: it is read off the ledger on arrival. If the stand
+    /// already holds this pawn's clothes it is a return trip, otherwise it is an outbound one. A
+    /// scribed job resuming after a load therefore always finds the right direction, with no extra
+    /// field.
     /// </remarks>
     public class JobDriver_ChangeAtNightStand : JobDriver
     {
@@ -87,15 +88,15 @@ namespace NightChange
         }
 
         /// <summary>
-        /// L'ordre n'est pas negociable.
+        /// The ordering is not optional.
         /// </summary>
         /// <remarks>
-        /// <b>Chaque retrait detruit le marqueur de port force.</b>
-        /// <c>Pawn_ApparelTracker.Notify_ApparelRemoved</c> appelle <c>SetForced(ap, false)</c> sans
-        /// condition : a l'instant ou un duster porte de force entre dans le portant, le fait qu'il
-        /// etait force cesse d'exister ou que ce soit dans le jeu. On le note donc <b>avant</b> le
-        /// retrait, et on le repose <b>apres</b> l'habillage. Le pilote vanilla, lui, force tout ce
-        /// qu'il distribue, y compris les habits de ville au retour : l'erreur inverse.
+        /// <b>Every apparel removal destroys the forced flag.</b>
+        /// <c>Pawn_ApparelTracker.Notify_ApparelRemoved</c> calls <c>SetForced(ap, false)</c>
+        /// unconditionally: the moment a force-worn duster is parked in the stand, the fact that it
+        /// was force-worn ceases to exist anywhere in the game. So it is captured <b>before</b> the
+        /// removal and restored <b>after</b> the wear. Vanilla's own driver instead force-wears
+        /// everything it hands back, street clothes included, which is the opposite error.
         /// </remarks>
         private void DoTransfer()
         {
@@ -140,9 +141,9 @@ namespace NightChange
 
             if (returning)
             {
-                // Ce qui etait force revient force ; ce qui ne l'etait pas repasse sous la politique
-                // vestimentaire. Et le marqueur pose sur la tenue de nuit doit partir, sinon elle
-                // reste epinglee au pion pour toujours.
+                // Garments that were forced come back forced; garments that were not stay
+                // policy-managed. And the flag on the night clothes must go, or they are pinned to
+                // the pawn forever.
                 foreach (Apparel apparel in wear)
                 {
                     if (comp.WasForced(apparel))
@@ -155,7 +156,8 @@ namespace NightChange
             }
             else
             {
-                // Sans marqueur, JobGiver_OptimizeApparel deshabille le pyjama a son prochain tour.
+                // Without the flag, JobGiver_OptimizeApparel un-swaps the night clothes at its next
+                // tick.
                 foreach (Apparel apparel in wear)
                 {
                     pawn.outfits.forcedHandler.SetForced(apparel, forced: true);

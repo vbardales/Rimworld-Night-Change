@@ -8,38 +8,37 @@ using Verse.AI;
 namespace NightChange
 {
     /// <summary>
-    /// L'aller : le pion part se coucher, on l'envoie d'abord au portant.
+    /// Outbound: the pawn is off to bed, so we send them to the stand first.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Prefixe sur <c>Pawn_JobTracker.StartJob</c>. On se greffe la et pas sur un JobGiver parce que
-    /// la decision « ce pion va dormir maintenant » est deja prise par le vanilla :
-    /// <see cref="JobGiver_GetRest"/> a lu l'emploi du temps, le niveau de repos,
-    /// <c>canSleepTick</c>, l'etat du seigneur, et a trouve un lit. La relire nous-memes, ce serait
-    /// dupliquer une demi-douzaine de regles qui bougent d'une version a l'autre.
+    /// A prefix on <c>Pawn_JobTracker.StartJob</c>. We hook there rather than on a JobGiver because
+    /// the decision "this pawn is going to sleep now" has already been made by vanilla:
+    /// <see cref="JobGiver_GetRest"/> has read the timetable, the rest need, <c>canSleepTick</c>,
+    /// the lord's state, and found a bed. Reading all that ourselves would duplicate half a dozen
+    /// rules that drift from version to version.
     /// </para>
     /// <para>
-    /// Le motif d'insertion est celui du vanilla lui-meme, qui glisse un halage opportuniste devant
-    /// le job en cours (<c>Pawn_JobTracker.cs:331-347</c>) : <b>demarrer le detour d'abord, remettre
-    /// le job d'origine en tete de file ensuite</b>. Si le detour leve et que le job d'origine etait
-    /// deja en file, le filet de securite le laisserait demarrer aussi -- un meme objet Job a deux
-    /// endroits. <c>StartJob</c> ne lit jamais la file, donc l'ordre inverse est equivalent en cas
-    /// de succes et plus sur en cas d'echec.
+    /// The insertion pattern is vanilla's own, which slips an opportunistic haul ahead of the
+    /// incoming job (<c>Pawn_JobTracker.cs:331-347</c>): <b>start the detour first, enqueue the
+    /// original second</b>. If starting the detour threw and the original were already queued, the
+    /// fail-open catch would let the original also start, putting one Job object in two places.
+    /// <c>StartJob</c> never reads the queue, so enqueueing after is equivalent on success and
+    /// safer on failure.
     /// </para>
     /// <para>
-    /// Le job differe n'est <b>pas</b> re-reserve avant le detour, contrairement a ce que fait Shift
-    /// Change. La cible ici est le lit du pion, que personne d'autre ne va lui prendre pendant qu'il
-    /// enfile son pyjama ; et la file du vanilla re-reserve d'elle-meme au demarrage. Payer la
-    /// gymnastique de reservation de Shift Change (qui existe parce qu'une cible de <i>travail</i>
-    /// est disputee) serait du bruit.
+    /// The deferred job is <b>not</b> re-reserved before the detour, unlike Shift Change. Its
+    /// target is a <i>work</i> target, contested between colonists; ours is the pawn's own bed,
+    /// which nobody is going to take while they put on their night clothes, and vanilla's queue
+    /// re-reserves by itself on start. Paying for Shift Change's reservation dance would be noise.
     /// </para>
     /// </remarks>
     [HarmonyPatch(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.StartJob))]
     public static class Patch_StartJob
     {
         /// <summary>
-        /// Demarrer un job depuis un prefixe de <c>StartJob</c> re-entre dans ce prefixe. Ce garde
-        /// fait passer l'appel interieur.
+        /// Starting a job from inside a <c>StartJob</c> prefix re-enters that prefix. This guard
+        /// makes the inner call pass through.
         /// </summary>
         private static bool reentrant;
 
@@ -74,15 +73,15 @@ namespace NightChange
                 return true;
             }
 
-            // Un blesse qui va au lit medical n'a rien a faire au portant : le vanilla l'y envoie
-            // parce qu'il a besoin de soins, pas parce que c'est l'heure.
+            // A wounded pawn heading for a medical bed has no business at the stand: vanilla sends
+            // them there because they need treatment, not because it is bedtime.
             if (HealthAIUtility.ShouldSeekMedicalRest(pawn))
             {
                 return true;
             }
 
-            // Rien ne se change pendant un raid ou un incendie. La porte ne couvre que l'aller :
-            // le retour, lui, est un pion qui marche vers son propre equipement.
+            // Nobody changes during a raid or a fire. This gate covers the outbound trip only: the
+            // return trip is a pawn walking toward their own gear.
             if (pawn.Map.dangerWatcher.DangerRating != StoryDanger.None)
             {
                 return true;
@@ -131,19 +130,19 @@ namespace NightChange
     }
 
     /// <summary>
-    /// Tant que le pion est en tenue de nuit, l'optimiseur vestimentaire est coupe.
+    /// While the pawn is in night clothes, the wardrobe optimizer is switched off.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Le marqueur de port force protege le pyjama : l'optimiseur ne le retirera pas. Mais il voit
-    /// un pion sous-vetu -- son duster et son gilet sont dans le portant, hors de portee puisque
-    /// <c>allowRemovingItems</c> est faux -- et part lui chercher <b>autre chose</b> dans les
-    /// stocks. Un colon en pyjama et parka.
+    /// The forced flag protects the night clothes: the optimizer will not remove them. But it sees
+    /// an underdressed pawn - their duster and vest are in the stand, out of reach since
+    /// <c>allowRemovingItems</c> is false - and goes to fetch them <b>something else</b> from the
+    /// stockpiles. A colonist in pyjamas and a parka.
     /// </para>
     /// <para>
-    /// Coupe aussi la branche de recoloration d'Ideology, qui roule sur ce meme JobGiver et
-    /// repeindrait la tenue de nuit a la couleur preferee du pion. L'ordre direct par la station de
-    /// style passe a cote du JobGiver et reste donc disponible.
+    /// This also switches off Ideology's apparel-recolor branch, which rides that same JobGiver and
+    /// would permanently dye the night clothes the pawn's favourite colour. The styling station's
+    /// float-menu order bypasses the giver and stays available.
     /// </para>
     /// </remarks>
     [HarmonyPatch(typeof(JobGiver_OptimizeApparel), "TryGiveJob")]
@@ -176,15 +175,14 @@ namespace NightChange
     }
 
     /// <summary>
-    /// La propriete cesse quand le vanilla dit qu'elle cesse.
+    /// Ownership must end when vanilla thinks it ends.
     /// </summary>
     /// <remarks>
-    /// <c>Pawn_Ownership.UnclaimAll()</c> est appele a la mort, a la vente, a l'enlevement et a la
-    /// sortie de carte, mais il ne libere qu'une liste cablee -- lit, tombe, trone, caisson de
-    /// mort-sommeil. Il ne parcourt pas les batiments a <c>CompAssignableToPawn</c>. Ce postfix
-    /// etend le meme instant aux portants, et moissonne aussi les portants simplement
-    /// <b>empruntes</b>, que la desassignation seule manquerait entierement : un emprunteur non
-    /// assigne ne l'etait de toute facon nulle part.
+    /// <c>Pawn_Ownership.UnclaimAll()</c> is called on death, trade, kidnap and map exit, but it
+    /// unclaims a hardcoded list only - bed, grave, throne, deathrest casket. It does not walk
+    /// <c>CompAssignableToPawn</c> buildings. This postfix extends the same moment to stands, and
+    /// it also reaps <b>borrowed</b> stands, which unassignment alone would miss entirely: a pool
+    /// borrower was never assigned to anything.
     /// </remarks>
     [HarmonyPatch(typeof(Pawn_Ownership), nameof(Pawn_Ownership.UnclaimAll))]
     public static class Patch_UnclaimAll
@@ -197,14 +195,14 @@ namespace NightChange
     }
 
     /// <summary>
-    /// Le bannissement n'est pas sur cette liste, et n'y arrive pas non plus par la sortie de carte.
+    /// Banishment is not on that list, and does not join it later either.
     /// </summary>
     /// <remarks>
-    /// Sur un colon pose sur la carte, <c>PawnBanishUtility.Banish</c> efface le statut d'invite
-    /// puis appelle <c>SetFaction(null)</c> : il n'atteint aucun <c>UnclaimAll</c>. Et la route de
-    /// sortie de carte ne rattrape rien apres coup, <c>Pawn.ExitMap</c> conditionnant son
-    /// <c>UnclaimAll</c> a un drapeau que l'effacement du statut d'invite a deja rendu faux. Le pion
-    /// s'en va vivant, en pyjama, avec le grand livre intact derriere lui.
+    /// On a spawned colonist, <c>PawnBanishUtility.Banish</c> clears guest status and runs
+    /// <c>SetFaction(null)</c>: it reaches no <c>UnclaimAll</c>. Nor does the map-exit route rescue
+    /// it afterwards, <c>Pawn.ExitMap</c> gating its <c>UnclaimAll</c> on a flag that the
+    /// guest-status clear has already made false. So the pawn walks away alive, in night clothes,
+    /// with the ledger intact behind them.
     /// </remarks>
     [HarmonyPatch(typeof(PawnBanishUtility), nameof(PawnBanishUtility.Banish), typeof(Pawn), typeof(PlanetTile), typeof(bool))]
     public static class Patch_Banish
@@ -227,10 +225,9 @@ namespace NightChange
 
             try
             {
-                // Un balayage complet plutot qu'une consultation de l'index : celui-ci ne connait
-                // que les emprunteurs, alors qu'un portant peut etre simplement assigne a un pion
-                // qui ne s'y est jamais change. C'est rare (une mort, un bannissement), donc le
-                // cout est sans objet.
+                // A full sweep rather than an index lookup: the index knows borrowers only, whereas
+                // a stand may simply be assigned to a pawn who never changed at it. This is rare (a
+                // death, a banishment), so the cost is beside the point.
                 foreach (Map map in Find.Maps)
                 {
                     foreach (Building_OutfitStand stand in

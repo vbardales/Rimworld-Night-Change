@@ -1,50 +1,51 @@
 # Attribution
 
-## Ce mod
+## This mod
 
-Écrit pour l'occasion. Aucun def, aucune texture, aucune ligne de code repris de quiconque.
-Licence MIT (`LICENSE`), **publiable tel quel**.
+Written for the purpose. Not a def, not a texture, not a line of code taken from anyone.
+MIT licensed (`LICENSE`), **publishable as it stands**.
+
+Written with the help of an AI assistant.
 
 ## RimWorld
 
-Les classes du jeu sur lesquelles le mod se greffe — `Building_OutfitStand`,
-`CompAssignableToPawn`, `Pawn_JobTracker`, `Pawn_ApparelTracker`, `JobGiver_OptimizeApparel`,
-`Pawn_Ownership`, `PawnBanishUtility` — appartiennent à **Ludeon Studios**. Elles sont appelées ou
-dérivées, jamais copiées.
+The game classes this mod hooks into — `Building_OutfitStand`, `CompAssignableToPawn`,
+`Pawn_JobTracker`, `Pawn_ApparelTracker`, `JobGiver_OptimizeApparel`, `Pawn_Ownership`,
+`PawnBanishUtility` — belong to **Ludeon Studios**. They are called or derived from, never copied.
 
-Le portant à vêtements (`Building_OutfitStand`) est un contenu d'**Odyssey**, déclaré en
-`modDependencies`. Le mod ne le redistribue pas : il ajoute deux comps à son def par
-`PatchOperation`, et le def reste celui de Ludeon.
+The outfit stand (`Building_OutfitStand`) is **Odyssey** content, declared in `modDependencies`.
+The mod does not redistribute it: it adds two comps to its def through a `PatchOperation`, and the
+def stays Ludeon's.
 
 ## Shift Change
 
-- **Auteur :** MrBeverage
-- **Source :** Steam Workshop
+- **Author:** MrBeverage
+- **Source:** Steam Workshop
   [3783456242](https://steamcommunity.com/sharedfiles/filedetails/?id=3783456242),
-  `MrBeverage.ShiftChange`, RimWorld 1.6. Dépôt : <https://github.com/beverage/shift-change>.
-- **Licence :** MIT, Copyright (c) 2026 MrBeverage. Sources et `docs/DESIGN.md` livrés dans le mod.
+  `MrBeverage.ShiftChange`, RimWorld 1.6. Repository: <https://github.com/beverage/shift-change>.
+- **Licence:** MIT, Copyright (c) 2026 MrBeverage. Sources and `docs/DESIGN.md` ship with the mod.
 
-**Rien n'en est repris.** Ni def, ni texture, ni code. Shift Change n'est ni une dépendance ni un
-incompatible : les deux mods peuvent tourner ensemble, séparément, ou pas du tout.
+**Nothing is taken from it.** Not a def, not a texture, not code. Shift Change is neither a
+dependency nor an incompatibility: the two mods can run together, separately, or not at all.
 
-Ce qui lui est dû, en revanche, est le **savoir**. Son `docs/DESIGN.md` documente, avec les
-références de ligne dans l'assembly décompilé, une série de pièges du portant à vêtements que ce
-mod aurait sinon découverts en jeu :
+What is owed to it is the **knowledge**. Its `docs/DESIGN.md` documents, with line references into
+the decompiled assembly, a series of outfit stand pitfalls this mod would otherwise have found the
+hard way, in play:
 
-| Piège | Où il joue ici |
+| Pitfall | Where it plays out here |
 |---|---|
-| Chaque retrait de vêtement détruit le marqueur de port forcé (`Notify_ApparelRemoved` appelle `SetForced(false)` sans condition) | `JobDriver_ChangeAtNightStand.DoTransfer` capture les marqueurs avant le retrait et les repose après l'habillage |
-| Deux `CompAssignableToPawn` sur le même def se relisent l'une l'autre, les comps s'écrivant à plat | `CompNightStand.PostExposeData` n'appelle pas la base et préfixe toutes ses clés |
-| Le gizmo de la base est câblé sur `Misc4` (**N**), qui sert au presse-papier de stockage | `CompNightStand.CompGetGizmosExtra` retire la liaison |
-| Un def laissé avec deux nœuds `<comps>` se résout au dernier arrivé, avec une erreur rouge | Le patch assure le nœud avant de le remplir |
-| La porte du danger doit être au-dessus de l'habillage et en-dessous du déshabillage | Le préfixe la porte, le `JobGiver` de retour ne la porte pas |
-| `PawnBanishUtility.Banish` n'atteint aucun `UnclaimAll`, et `Pawn.ExitMap` ne rattrape rien après coup | `Patch_Banish` moissonne au moment du bannissement |
-| Le pilote vanilla du portant force tout ce qu'il rend, y compris les habits de ville | Le nôtre ne repose que les marqueurs notés au dépôt |
+| Every apparel removal destroys the forced flag (`Notify_ApparelRemoved` calls `SetForced(false)` unconditionally) | `JobDriver_ChangeAtNightStand.DoTransfer` captures the flags before removal and restores them after the wear |
+| Two `CompAssignableToPawn` on the same def cross-read each other, comps scribing flat | `CompNightStand.PostExposeData` does not call the base and prefixes all its keys |
+| The base comp's gizmo is hardcoded to `Misc4` (**N**), which serves the storage clipboard | `CompNightStand.CompGetGizmosExtra` strips the binding |
+| A def left with two `<comps>` nodes resolves last-wins, with a red error | The patch ensures the node before filling it |
+| The danger gate belongs above the dressing path and below the undressing one | The prefix carries it; the return-trip `JobGiver` does not |
+| `PawnBanishUtility.Banish` reaches no `UnclaimAll`, and `Pawn.ExitMap` does not rescue it afterwards | `Patch_Banish` reaps at the moment of banishment |
+| Vanilla's own stand driver force-wears everything it hands back, street clothes included | Ours only restores the flags recorded at check-in |
 
-Une dette intellectuelle n'est pas une dette de licence, mais elle se cite.
+An intellectual debt is not a licence debt, but it is worth naming.
 
-## Vérifications faites sur le jeu
+## Checks made against the game
 
-Les affirmations de code ont été vérifiées sur l'assembly décompilée de RimWorld **1.6**
-(`ilspycmd` sur `Assembly-CSharp.dll`). Les noms de méthode dérivent lentement d'une version à
-l'autre ; les numéros de ligne, vite.
+Code claims were verified against the decompiled RimWorld **1.6** assembly (`ilspycmd` on
+`Assembly-CSharp.dll`). Method names drift slowly from one version to the next; line numbers drift
+fast.

@@ -1,73 +1,76 @@
 # Night Change
 
-Mod RimWorld 1.6. Les colons enfilent une tenue de nuit en allant se coucher, et la quittent en se
-levant.
+A RimWorld 1.6 mod. Colonists change into night clothes on their way to bed, and back out of them
+when they get up.
 
-Le mod n'ajoute **ni vêtement, ni bâtiment, ni texture** : il pose un comportement sur le portant à
-vêtements d'Odyssey. On met un portant dans une chambre, on y accroche une tenue de nuit, et le
-colon qui dort là s'y arrête en allant au lit.
+The mod ships **no clothing, no buildings and no art**: it puts behaviour on Odyssey's outfit
+stand. Put a stand in a bedroom, hang a set of night clothes on it, and the colonist who sleeps
+there stops at it on the way to bed.
 
-## Ce qu'il fait, en une page
+## What it does, on one page
 
 | | |
 |---|---|
-| Déclencheur | Le job `LayDown` **automatique** visant un lit, c'est-à-dire la décision de `JobGiver_GetRest`, prise par le jeu et non par nous |
-| Le portant | Un `Building_OutfitStand` vanilla dans la même pièce que le lit, à portée réglable |
-| À qui il est | Assigné, ou par défaut au propriétaire du lit de la pièce — une chambre ne demande donc aucun réglage |
-| Retour | Un `JobGiver` posé sur `Humanlike_PreMain` : après la fuite d'un incendie, la température vitale, le travail d'urgence et l'optimiseur vestimentaire ; avant le travail ordinaire |
-| Sauvegarde | Le grand livre vit sur le comp du portant, avec des clés préfixées |
+| Trigger | The **automatic** `LayDown` job targeting a bed, that is, `JobGiver_GetRest`'s decision, made by the game rather than by us |
+| The stand | A vanilla `Building_OutfitStand` in the same room as the bed, within a configurable range |
+| Whose it is | Assigned, or by default the owner of the bed in the room, so a bedroom needs no setup |
+| Return trip | A `JobGiver` on `Humanlike_PreMain`: after fleeing a fire, safe temperature, emergency work and the apparel optimizer; before ordinary work |
+| Save data | The ledger lives on the stand's comp, under mod-prefixed keys |
 
-## Décisions qui ne se devinent pas
+## Decisions that are not obvious
 
-**L'aller est un préfixe de `StartJob`, le retour est un `JobGiver`.** Pas par goût de la symétrie
-brisée : depuis `StartJob`, il est impossible de savoir de façon fiable si le pion reste couché.
-`pawn.jobs.posture` n'est remis à zéro par aucun code du `Pawn_JobTracker` — il reste à
-`LayingInBed` jusqu'à ce qu'un toil du *nouveau* job en décide autrement. Un colon qui regarde la
-télévision au lit démarre bel et bien un nouveau job, et un préfixe l'aurait tiré hors du lit pour
-se rhabiller. Dans l'arbre de décision, le problème disparaît : la branche
-`ThinkNode_ConditionalMustKeepLyingDown` est tout en haut et court-circuite tout le reste.
+**The outbound trip is a `StartJob` prefix, the return trip is a `JobGiver`.** Not out of a taste
+for broken symmetry: from `StartJob` it is impossible to tell reliably whether the pawn is staying
+in bed. `pawn.jobs.posture` is reset by no code in `Pawn_JobTracker` — it stays at `LayingInBed`
+until a toil of the *new* job decides otherwise. A colonist watching television in bed does start
+new jobs, and a prefix would have pulled them out of bed to get dressed. In the think tree the
+problem disappears: `ThinkNode_ConditionalMustKeepLyingDown` sits at the very top and
+short-circuits everything else.
 
-**L'emploi du temps décide de la fin de la nuit.** Tant que l'heure courante est marquée
-« sommeil », le colon reste en pyjama. Sans cette porte, se lever grignoter à deux heures du matin
-coûte trois trajets au portant. L'emploi du temps par défaut du jeu dort de 22 h à 5 h : la règle
-mord dès la première partie, sans rien régler.
+**The timetable decides when the night ends.** While the current hour is marked "sleep", the
+colonist stays in night clothes. Without that gate, getting up for a snack at two in the morning
+costs three trips to the stand. The game's default timetable sleeps from 22h to 5h, so the rule
+bites in the very first colony, with nothing to configure.
 
-**Le garde-froid.** Contrairement à une blouse de laboratoire, un pyjama *remplace* les habits au
-lieu de se superposer. Un changement complet peut donc retirer au colon toute son isolation, et le
-vanilla ne protège pas de ça — simplement parce que rien ne l'envoie normalement dormir déshabillé.
-Le mod compare l'isolation des deux tenues, applique la différence au minimum confortable du colon,
-et renonce si la chambre est plus froide.
+**The cold guard.** Unlike a lab coat, night clothes *replace* what is worn rather than layering
+over it. A full change can therefore strip a colonist of all their insulation, and vanilla does not
+protect against that — simply because nothing normally sends anyone to bed undressed. The mod
+compares the two insulation totals, applies the difference to the colonist's own comfortable
+minimum, and gives up if the bedroom is colder than that.
 
-**Aucune re-réservation du job différé**, contrairement à Shift Change. Sa cible à lui est une cible
-de *travail*, disputée entre colons ; la nôtre est le lit du pion, que personne ne va lui prendre
-pendant qu'il enfile son pyjama. Et la file du vanilla re-réserve d'elle-même au démarrage.
+**No re-reservation of the deferred job**, unlike Shift Change. Its target is a *work* target,
+contested between colonists; ours is the pawn's own bed, which nobody is going to take while they
+put on their night clothes. And vanilla's queue re-reserves by itself on start.
 
-**Fail open.** Le préfixe s'exécute au démarrage de **tous** les jobs de **tous** les pions. Chaque
-greffe rattrape, journalise une seule fois, désactive le mod pour la session, et laisse le vanilla
-continuer.
+**Fail open.** The prefix runs at the start of **every** job of **every** pawn. Every hook catches,
+logs once, disables the mod for the session, and lets vanilla proceed.
 
-## Cohabitation avec Shift Change
+## Living alongside Shift Change
 
 [Shift Change](https://steamcommunity.com/sharedfiles/filedetails/?id=3783456242) (MrBeverage, MIT)
-habille les colons selon le **rôle de la pièce**, pour le travail et le loisir, et dit lui-même
-qu'il laisse le lit tranquille. Les deux mods se posent sur le même def de portant sans se marcher
-dessus :
+dresses colonists by the **room's role**, for work and for recreation, and says itself that it
+leaves the bed alone. Both mods put comps on the same stand def without treading on each other:
 
-- une chambre n'est pas une pièce de travail, donc aucun des deux ne réclame le portant de l'autre ;
-- nos clés de scribe sont préfixées `NightChange_`, parce que les comps s'écrivent à plat dans le
-  nœud de sauvegarde de l'objet et que deux sous-classes de `CompAssignableToPawn` sur le même def
-  se reliraient l'une l'autre ;
-- notre gizmo perd sa liaison de raccourci, la base la câblant sur `Misc4` (**N**) qui sert déjà au
-  presse-papier des réglages de stockage sur un bâtiment de stockage.
+- a bedroom is not a work room, so neither claims the other's stand;
+- our scribe keys are prefixed `NightChange_`, because comps scribe flat into the thing's save node
+  and two `CompAssignableToPawn` subclasses on the same def would cross-read each other;
+- our gizmo drops its hotkey binding, the base comp hardcoding it to `Misc4` (**N**), which already
+  serves the storage settings clipboard on a storage building.
 
-`loadAfter` cite Shift Change et Outfit Stands Plus pour que tous les comps atterrissent dans un
-ordre déterministe.
+`loadAfter` names Shift Change and Outfit Stands Plus so every comp lands in one deterministic
+order.
 
-## Compiler
+## Building
 
 ```
 dotnet build Source/NightChange.csproj -c Release
 ```
 
-Les assemblies de référence viennent de NuGet (`Krafs.Rimworld.Ref`) : aucune installation de
-RimWorld n'est nécessaire pour compiler.
+Reference assemblies come from NuGet (`Krafs.Rimworld.Ref`), so no RimWorld installation is needed
+to compile.
+
+## Credits and licence
+
+MIT (`LICENSE`). Written with the help of an AI assistant. See `ATTRIBUTION.md` for what is owed to
+whom — in particular to Shift Change's design notes, from which nothing was copied but a good deal
+was learned.

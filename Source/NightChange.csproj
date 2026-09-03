@@ -18,10 +18,10 @@
 
   <ItemGroup>
     <!--
-      Pas de publiciseur : tout ce que ce mod touche est deja public (curJob, jobQueue,
-      Building_OutfitStand.AddApparel/RemoveApparel, et assignedPawns qui est protected donc
-      accessible a une sous-classe). Le publiciseur ferait passer des membres protected en
-      public et casserait CompNightStand, qui les redefinit.
+      No publicizer: everything this mod touches is already public (curJob, jobQueue,
+      Building_OutfitStand.AddApparel/RemoveApparel, and assignedPawns, which is protected and so
+      reachable from a subclass). A publicizer would turn protected members public and break
+      CompNightStand, which overrides them.
     -->
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*-*" />
     <PackageReference Include="Lib.Harmony" Version="2.*">

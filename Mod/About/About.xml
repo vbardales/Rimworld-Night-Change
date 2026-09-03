@@ -42,7 +42,16 @@ SETTINGS
 - Refuse the change when the bedroom is too cold, with an adjustable margin.
 - Maximum distance between bed and stand.
 
-Adds no clothing, no buildings and no art of its own. It uses the vanilla outfit stand and whatever you hang on it. Vanilla has nothing that reads as night clothes, so any apparel mod that adds pyjamas, robes or nightgowns is worth having alongside.</description>
+Adds no clothing, no buildings and no art of its own. It uses the vanilla outfit stand and whatever you hang on it. Vanilla has nothing that reads as night clothes, so any apparel mod that adds pyjamas, robes or nightgowns is worth having alongside.
+
+CREDITS
+
+Written with the help of an AI assistant, which is worth saying plainly.
+
+Thanks to Andreas Pardeike for Harmony, and to MrBeverage, whose Shift Change is MIT licensed and ships its own design notes. Nothing of his mod is reused here, but those notes documented a series of outfit stand pitfalls this mod would otherwise have found in play, and ATTRIBUTION.md lists them one by one.
+
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.</description>
+  <url>https://github.com/vbardales/Rimworld-Night-Change</url>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
@@ -61,10 +70,9 @@ Adds no clothing, no buildings and no art of its own. It uses the vanilla outfit
     <li>Ludeon.RimWorld.Odyssey</li>
     <li>brrainz.harmony</li>
     <!--
-      Ni l'un ni l'autre n'est une dependance : ces deux mods posent des comps sur le meme def de
-      portant que nous. Charger apres eux fait atterrir tous les comps dans un ordre deterministe.
-      La majuscule de « PLus » est reprise telle quelle de leur About ; les packageId se comparent
-      sans tenir compte de la casse.
+      Neither is a dependency: both mods put comps on the same outfit stand def we do. Sorting
+      after them lands every comp in one deterministic order. The capital "PLus" is verbatim from
+      their About; packageIds compare case-insensitively.
     -->
     <li>MrBeverage.ShiftChange</li>
     <li>khamenman.OutfitStandsPLus</li>

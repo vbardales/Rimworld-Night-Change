@@ -5,19 +5,19 @@ using Verse;
 namespace NightChange
 {
     /// <summary>
-    /// Index « qui est en tenue de nuit, et dans quel portant sont ses habits ».
+    /// The "who is in night clothes, and which stand holds their day clothes" index.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Rien n'est scribe ici : la verite vit dans le grand livre de chaque
-    /// <see cref="CompNightStand"/>, qui part avec le portant et survit a la sauvegarde. Cet index
-    /// n'est qu'un cache, reconstruit au chargement.
+    /// Nothing here is scribed: the truth lives in each <see cref="CompNightStand"/>'s ledger,
+    /// which travels with the stand and survives saving. This index is only a cache, rebuilt on
+    /// load.
     /// </para>
     /// <para>
-    /// Il existe pour une seule raison : le prefixe de <c>StartJob</c> doit repondre « ce pion
-    /// est-il en pyjama ? » a <b>chaque</b> job de <b>chaque</b> pion. Balayer tous les portants de
-    /// la carte a chaque fois serait payer un parcours de batiments pour une reponse qui est non
-    /// dans plus de 99 % des cas.
+    /// It exists for one reason: the <c>StartJob</c> prefix has to answer "is this pawn in night
+    /// clothes?" for <b>every</b> job of <b>every</b> pawn. Sweeping every stand on the map each
+    /// time would be paying for a building scan to get an answer that is no more than 99% of the
+    /// time.
     /// </para>
     /// </remarks>
     public class NightChangeTracker : GameComponent
@@ -29,9 +29,8 @@ namespace NightChange
         private readonly Dictionary<Pawn, CompNightStand> borrowers = new Dictionary<Pawn, CompNightStand>();
 
         /// <summary>
-        /// Dernier tick ou ce pion s'est change, pour empecher un aller-retour en boucle. Non
-        /// scribe : au pire, un chargement ouvre une fenetre de vingt secondes ou le filet ne joue
-        /// pas, ce qui est sans consequence.
+        /// Last tick this pawn changed, to stop a change/change-back loop. Not scribed: at worst a
+        /// load opens a twenty-second window where the net does not catch, which is harmless.
         /// </summary>
         private readonly Dictionary<Pawn, int> lastChangeTick = new Dictionary<Pawn, int>();
 
@@ -91,8 +90,8 @@ namespace NightChange
 
             int now = Find.TickManager.TicksGame;
 
-            // Purge paresseuse : sans elle, le dictionnaire garderait une entree par colon mort
-            // pour la duree de la partie.
+            // Lazy purge: without it the dictionary would keep one entry per dead colonist for the
+            // life of the game.
             if (lastChangeTick.Count > 128)
             {
                 lastChangeTick.RemoveAll(kv => now - kv.Value >= ChangeCooldownTicks);
@@ -108,7 +107,7 @@ namespace NightChange
                    && Find.TickManager.TicksGame - tick < ChangeCooldownTicks;
         }
 
-        /// <summary>Le portant qui tient les habits de jour de ce pion, ou null.</summary>
+        /// <summary>The stand holding this pawn's day clothes, or null.</summary>
         public CompNightStand LedgerFor(Pawn pawn)
         {
             if (pawn == null || !borrowers.TryGetValue(pawn, out CompNightStand comp))
@@ -116,7 +115,8 @@ namespace NightChange
                 return null;
             }
 
-            // Le portant a pu etre detruit ou deminiaturise sans passer par NotifyUndressed.
+            // The stand may have been destroyed or uninstalled without going through
+            // NotifyUndressed.
             if (comp == null || comp.parent.DestroyedOrNull() || comp.Borrower != pawn)
             {
                 borrowers.Remove(pawn);

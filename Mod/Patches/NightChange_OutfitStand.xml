@@ -2,18 +2,18 @@
 <Patch>
 
   <!--
-    Le comp d'assignation et son grand livre sont poses sur le def vanilla du portant, et non sur un
-    batiment a nous : les portants deja construits dans une partie en cours gagnent le gizmo au
-    chargement, et le mod n'ajoute ni art ni cout de recherche.
+    The ownership comp and its ledger are patched onto the vanilla stand def rather than shipped as
+    a building of our own: stands already built in an existing save gain the gizmo on load, and the
+    mod adds no art and no research cost.
 
-    Le noeud <comps> est d'abord *assure*, puis rempli. Deux raisons, dans cet ordre :
+    The <comps> node is first *ensured*, then filled. Two reasons, in this order:
 
-    1. Le noeud vit sur l'abstrait OutfitStandBase, pas sur le def concret. Les PatchOperation
-       s'appliquent avant la resolution de l'heritage : un xpath vers .../comps sur le def concret ne
-       trouverait rien. On lui en cree un, et l'heritage concatene ensuite les deux listes.
-    2. D'autres mods ajoutent des comps a ce meme def : Shift Change et Outfit Stands Plus le font.
-       Un def laisse avec deux noeuds <comps> se resout au dernier arrive, avec une erreur rouge
-       « defines the same field twice », et le noeud du premier mod disparait.
+    1. The node lives on the abstract OutfitStandBase, not on the concrete def. PatchOperations run
+       before inheritance is resolved, so an xpath to .../comps on the concrete def would find
+       nothing. We create one, and inheritance then concatenates the two lists.
+    2. Other mods add comps to this same def: Shift Change and Outfit Stands Plus both do. A def
+       left with two <comps> nodes is resolved last-wins with a red "defines the same field twice"
+       error, and the first mod's node disappears.
   -->
 
   <Operation Class="PatchOperationConditional">
@@ -37,7 +37,7 @@
     </value>
   </Operation>
 
-  <!-- Le portant pour enfants de Biotech, dont la classe derive de Building_OutfitStand. -->
+  <!-- Biotech's kid outfit stand, whose class derives from Building_OutfitStand. -->
   <Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Biotech">
     <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]/comps</xpath>
     <nomatch Class="PatchOperationAdd">
