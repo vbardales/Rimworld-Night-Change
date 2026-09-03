@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NightChange_ModTitle>Night Change</NightChange_ModTitle>
+
+  <NightChange_SettingInheritOwner>Unassigned stands serve the bed's owner</NightChange_SettingInheritOwner>
+  <NightChange_SettingInheritOwnerDesc>A stand with no owner set serves whoever owns a bed in the same room, so a private bedroom needs no setup. Turn this off to require an explicit owner on every stand.</NightChange_SettingInheritOwnerDesc>
+
+  <NightChange_SettingColdGuard>Refuse the change when the bedroom is too cold</NightChange_SettingColdGuard>
+  <NightChange_SettingColdGuardDesc>Night clothes replace day clothes rather than layering over them, so a change can cost a colonist their insulation. This compares the two and skips the change when the bedroom is colder than the colonist could stand afterwards.</NightChange_SettingColdGuardDesc>
+
+  <NightChange_SettingColdMargin>Safety margin: {0} °C</NightChange_SettingColdMargin>
+  <NightChange_SettingDistance>Maximum distance from bed to stand: {0} cells</NightChange_SettingDistance>
+
+  <NightChange_AssignGizmo>Set sleeper</NightChange_AssignGizmo>
+  <NightChange_AssignGizmoDesc>Choose who changes at this stand before bed. Left unassigned, it serves whoever owns a bed in the same room.</NightChange_AssignGizmoDesc>
+
+  <NightChange_ChangeBackGizmo>Change back now</NightChange_ChangeBackGizmo>
+  <NightChange_ChangeBackGizmoDesc>Interrupt {0} so they come and change back into their own clothes.</NightChange_ChangeBackGizmoDesc>
+
+  <NightChange_InspectInUse>Holding {0}'s clothes</NightChange_InspectInUse>
+
+</LanguageData>

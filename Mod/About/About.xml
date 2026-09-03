@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Night Change</name>
+  <author>nelim</author>
+  <packageId>nelim.nightchange</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>REQUIRES ODYSSEY (for the outfit stand) AND HARMONY.
+
+Colonists change into night clothes on their way to bed, and back out of them when they get up.
+
+Put a vanilla outfit stand in a bedroom and hang a set of night clothes on it. When the colonist who sleeps there goes to bed of their own accord, they stop at the stand, change, and go to sleep. Their day clothes wait in the stand overnight and come back exactly as they were, force-worn markers included.
+
+A stand in a private bedroom needs no setup at all: it serves whoever owns the bed in the room. Set owners on it for a barracks, where several colonists could otherwise lay claim to the same stand.
+
+WHY THIS IS WORTH A MOD
+
+Nothing dresses a colonist for bed. Pyjama mods exist and say so themselves: they ship the clothes and leave the wearing to you, which in practice means never. Shift Change dresses colonists for the room they work or relax in and states plainly that it leaves the bed alone, because vanilla gives patients recreation they can take lying down and nobody should be pulled out of bed for a wardrobe. This mod is the other half, and the two sit side by side without touching: a bedroom is not a work room, so neither claims the other's stand.
+
+The point is not the clothes. It is that going to bed becomes a thing a colonist does rather than a state they enter. Night clothes usually trade work speed and armour for comfort, which the game already prices; the mod simply makes the trade happen at the right hour without you clicking.
+
+WHAT IT WILL NOT DO
+
+Deliberately narrow, so it never fights you.
+
+- Automatic sleep only. A direct order to lie down is never delayed by a wardrobe trip.
+- Medical rest is left alone. A colonist the game sends to bed to be treated goes straight there.
+- No changing during a raid or a fire. Changing back is allowed then, because that is a colonist walking towards their own gear rather than away from it.
+- Nobody is pulled out of bed. Watching television in bed, meditating in bed and resting after surgery all leave the night clothes on; the change back happens when they get up for good.
+- Getting dressed happens before the day's work, but after fleeing a fire, after seeking a safe temperature and after emergency work.
+
+THE COLD
+
+Unlike a lab coat, night clothes replace what the colonist is wearing rather than layering over it, so a full change can strip a colonist of their insulation. Sleeping in a freezing bedroom in nothing but a nightshirt is a real way to die, and vanilla does not protect against it because nothing normally sends anyone there.
+
+So the mod checks. It compares the insulation the night clothes give against the insulation the day clothes gave, applies the difference to the colonist's own comfortable minimum, and refuses the change when the bedroom is colder than that. The safety margin is adjustable, and the whole check can be turned off.
+
+SETTINGS
+
+- Unassigned stands serve the owner of the bed in the room. On by default.
+- Refuse the change when the bedroom is too cold, with an adjustable margin.
+- Maximum distance between bed and stand.
+
+Adds no clothing, no buildings and no art of its own. It uses the vanilla outfit stand and whatever you hang on it. Vanilla has nothing that reads as night clothes, so any apparel mod that adds pyjamas, robes or nightgowns is worth having alongside.</description>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>Ludeon.RimWorld.Odyssey</packageId>
+      <displayName>Odyssey</displayName>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+    <li>brrainz.harmony</li>
+    <!--
+      Ni l'un ni l'autre n'est une dependance : ces deux mods posent des comps sur le meme def de
+      portant que nous. Charger apres eux fait atterrir tous les comps dans un ordre deterministe.
+      La majuscule de « PLus » est reprise telle quelle de leur About ; les packageId se comparent
+      sans tenir compte de la casse.
+    -->
+    <li>MrBeverage.ShiftChange</li>
+    <li>khamenman.OutfitStandsPLus</li>
+  </loadAfter>
+</ModMetaData>

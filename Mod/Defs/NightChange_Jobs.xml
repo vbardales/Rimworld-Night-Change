@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>NightChange_ChangeAtStand</defName>
+    <driverClass>NightChange.JobDriver_ChangeAtNightStand</driverClass>
+    <reportString>changing at TargetA.</reportString>
+  </JobDef>
+
+  <ThinkTreeDef>
+    <defName>NightChange_ChangeBack</defName>
+    <insertTag>Humanlike_PreMain</insertTag>
+    <insertPriority>100</insertPriority>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="NightChange.JobGiver_ChangeBack" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+</Defs>
