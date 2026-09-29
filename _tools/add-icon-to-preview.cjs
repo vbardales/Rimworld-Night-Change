@@ -38,12 +38,18 @@ const angle = side === 'left' ? 15 : -15;
     .resize(size, size)
     .rotate(angle, { background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .toBuffer();
-  const im = await sharp(icon).metadata();
-  const margin = parseInt(process.argv[4] || '-34', 10); // negative: bleeds off the corner
+  // Trim the transparent corners the rotation adds, so margins measure the mascot itself.
+  const raw = await sharp(icon).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  let x0 = raw.info.width, y0 = raw.info.height, x1 = -1, y1 = -1;
+  for (let y = 0; y < raw.info.height; y++) for (let x = 0; x < raw.info.width; x++)
+    if (raw.data[(y * raw.info.width + x) * 4 + 3] > 8) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  const iconT = await sharp(icon).extract({ left: x0, top: y0, width: x1 - x0 + 1, height: y1 - y0 + 1 }).toBuffer();
+  const im = await sharp(iconT).metadata();
+  const margin = parseInt(process.argv[4] || '-5', 10); // negative: bleeds off the corner
   const marginX = parseInt(process.argv[5] || String(margin), 10); // side margin, negative bleeds off the side
   const left = side === 'left' ? marginX : bm.width - im.width - marginX;
   const top = bm.height - im.height - margin;
-  await base.composite([{ input: icon, left, top }]).png({ compressionLevel: 9 })
+  await base.composite([{ input: iconT, left, top }]).png({ compressionLevel: 9 })
     .toFile(path.join(root, 'Art/Preview-with-icon.png'));
   console.log(`placed ${im.width}x${im.height} at ${left},${top} (${side}, ${angle}deg)`);
 })();
