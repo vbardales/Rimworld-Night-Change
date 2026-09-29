@@ -33,6 +33,15 @@ namespace NightChange.PickleSteps
             var origin = new Driver.Origin { X = x, Z = z };
             ctx.Set(origin);
 
+            // test-colony carries hostile insects and hives (PickleTools/docs/FIXTURES.md): they would keep the
+            // danger watcher off StoryDanger.None and spawn more. Take them, and their buildings, off the map.
+            foreach (Thing hostile in map.listerThings.AllThings
+                         .Where(t => t.Faction != null && t.Faction != Faction.OfPlayer && t.Faction.HostileTo(Faction.OfPlayer))
+                         .ToList())
+            {
+                if (!hostile.Destroyed) hostile.Destroy(DestroyMode.Vanish);
+            }
+
             ThingDef wall = ThingDefOf.Wall;
             ThingDef door = ThingDefOf.Door;
             for (int dx = 0; dx <= 6; dx++)

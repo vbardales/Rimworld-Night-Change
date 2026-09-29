@@ -12,7 +12,7 @@ so nothing test-related ships in the Workshop folder.
 of PickleTools' (checked by pattern, not by Pickle's expression engine, so a collision is still possible).
 A `@review` capture asserts nothing about an image: a green scenario says the trajectory ran, not that the
 picture shows anything. The fixture (a walled, roofed 5 by 5 bedroom built at x=30 z=30, layout in
-`Source/Driver.cs`) assumes the `test-colony` map has room there; a first run may need another origin.
+`Source/Driver.cs`) assumes the `test-colony` map has room there (thing-free by a static read of the save, terrain not checked; see `PickleTools/docs/FIXTURES.md`). The bedroom builder first removes the hostile insects and hives the fixture carries; a first run may still need another origin.
 
 ## What stays offline, and why
 
