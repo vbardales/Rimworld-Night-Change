@@ -40,7 +40,7 @@ Previous stage: `dansMonoRepo`. Retained: **done** (first pass gave preTest; the
 | Transition | Result |
 | --- | --- |
 | dansMonoRepo -> horsMonoRepo | Met 2026-09-29: standalone repo in the folder, origin `vbardales/Rimworld-Night-Change` (public, pushed commit 51261b2); monorepo commit "Night Change leaves the monorepo". |
-| -> ModIcon / Preview | Met: build passes, rebuilt DLL SHA256 equals shipped `CE8EFA93...C98C`; icon 128x128 25,567 B; Preview 896x504 647,695 B. Icon 32 px legibility not re-judged (owner-only). |
+| -> ModIcon / Preview | Met: build passes, rebuilt DLL SHA256 equals shipped `DA2890A6...25F92B88`; icon 128x128 25,567 B; Preview 896x504 647,695 B. Icon 32 px legibility not re-judged (owner-only). |
 | -> preOptions | Met: English description ends with `[url=...]Source code on GitHub[/url]`; cyan accent added 2026-09-13. |
 | -> options | Met: 4 settings, Mod options entry, MainButton shortcut hidden by default (`buttonVisible=false`), 13 offline assertions pass. |
 | -> l10n | Met: 13 Keyed keys EN/FR, 3 French DefInjected, `Check-DefInjected` 0 errors. Plurals (rule of 2026-09-25): the only counted noun is "cells" (slider 3..40, never 1), so no `.One`/`.Many` form is reachable; justified exclusion. |
