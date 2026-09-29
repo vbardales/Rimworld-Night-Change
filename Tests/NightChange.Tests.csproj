@@ -7,6 +7,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <!-- The Pickle step assembly has its own project and references Pickle: keep it out of this one. -->
+    <Compile Remove="Pickle/**" />
     <ProjectReference Include="../Source/NightChange.csproj" />
   </ItemGroup>
 </Project>
