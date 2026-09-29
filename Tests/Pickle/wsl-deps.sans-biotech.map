@@ -3,3 +3,4 @@
 # ... -DepMap wsl-deps.sans-biotech.map -Language English -Filter '13-without-biotech,02-cycle'
 !ludeon.rimworld.biotech
 nelim.pickletools.inspecttabs path:PickleTools/InspectTabs/Mod
+nelim.pickletools.keyedclick path:PickleTools/KeyedClick/Mod
