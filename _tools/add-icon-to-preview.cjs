@@ -40,7 +40,8 @@ const angle = side === 'left' ? 15 : -15;
     .toBuffer();
   const im = await sharp(icon).metadata();
   const margin = parseInt(process.argv[4] || '-34', 10); // negative: bleeds off the corner
-  const left = side === 'left' ? margin : bm.width - im.width - margin;
+  const marginX = parseInt(process.argv[5] || String(margin), 10); // side margin, negative bleeds off the side
+  const left = side === 'left' ? marginX : bm.width - im.width - marginX;
   const top = bm.height - im.height - margin;
   await base.composite([{ input: icon, left, top }]).png({ compressionLevel: 9 })
     .toFile(path.join(root, 'Art/Preview-with-icon.png'));
