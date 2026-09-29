@@ -39,7 +39,7 @@ const angle = side === 'left' ? 15 : -15;
     .rotate(angle, { background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .toBuffer();
   const im = await sharp(icon).metadata();
-  const margin = 14;
+  const margin = parseInt(process.argv[4] || '-34', 10); // negative: bleeds off the corner
   const left = side === 'left' ? margin : bm.width - im.width - margin;
   const top = bm.height - im.height - margin;
   await base.composite([{ input: icon, left, top }]).png({ compressionLevel: 9 })
