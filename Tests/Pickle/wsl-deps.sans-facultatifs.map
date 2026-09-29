@@ -4,3 +4,4 @@
 #
 # powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod NightChange -DepMap wsl-deps.sans-facultatifs.map -Language English -Filter 'Night Change - Pickle tests,!@restart,!@sans-biotech'
 nelim.pickletools.screenshotmode path:PickleTools/ScreenshotMode/Mod
+nelim.pickletools.inspecttabs path:PickleTools/InspectTabs/Mod

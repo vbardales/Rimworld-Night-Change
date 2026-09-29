@@ -11,7 +11,7 @@ Feature: Night Change without Biotech
     Given the save "test-colony" is loaded
     Then mod "Ludeon.RimWorld.Biotech" is not loaded
     And no def "Building_KidOutfitStand" exists
-    And def "Building_OutfitStand" was patched by mod "nelim.nightchange"
+    And def "Building_OutfitStand" was patched by mod "Night Change"
     And Night Change: the mod has not disabled itself
     And no errors were logged
 

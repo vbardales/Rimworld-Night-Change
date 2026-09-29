@@ -7,6 +7,7 @@ using RimWorks.Pickle;
 using RimWorld;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 namespace NightChange.PickleSteps
 {
@@ -257,7 +258,7 @@ namespace NightChange.PickleSteps
         }
 
         [When("Night Change: the stand is destroyed")]
-        public void DestroyStand(PickleContext ctx) => Driver.Stand(ctx).Destroy(DestroyMode.Vanish);
+        public void DestroyStand(PickleContext ctx) => Driver.Stand(ctx).Destroy(DestroyMode.Deconstruct); // Vanish deletes the held clothes; deconstruction drops them, as the mod relies on
 
         [When("Night Change: {string} is banished")]
         public void Banish(PickleContext ctx, string name)
@@ -280,6 +281,9 @@ namespace NightChange.PickleSteps
             Pawn raider = PawnGenerator.GeneratePawn(PawnKindDefOf.Pirate, enemy);
             GenSpawn.Spawn(raider, CellFinder.RandomEdgeCell(map), map);
             ctx.Assert(raider.Spawned, "the raider did not spawn");
+            // The danger watcher counts only hostiles that belong to an active lord, not a lone pawn.
+            LordMaker.MakeNewLord(enemy, new LordJob_AssaultColony(enemy), map,
+                new List<Pawn> { raider });
         }
 
         // ------------------------------------------------------------------ waits

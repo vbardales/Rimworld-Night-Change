@@ -13,6 +13,6 @@ Feature: Night Change loads and patches the outfit stand
     And def "NightChange_ChangeAtStand" exists
     And def "NightChange_ChangeBack" exists
     And def "NightChange_Settings" of type "MainButtonDef" exists
-    And def "Building_OutfitStand" was patched by mod "nelim.nightchange"
+    And def "Building_OutfitStand" was patched by mod "Night Change"
     And Night Change: the mod has not disabled itself
     And no errors were logged

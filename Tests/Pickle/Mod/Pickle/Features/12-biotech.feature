@@ -5,5 +5,5 @@ Feature: the kid outfit stand carries the comp when Biotech is present
 
   Scenario: the patch reaches the kid outfit stand
     Given the save "test-colony" is loaded
-    Then def "Building_KidOutfitStand" was patched by mod "nelim.nightchange"
+    Then def "Building_KidOutfitStand" was patched by mod "Night Change"
     And no errors were logged

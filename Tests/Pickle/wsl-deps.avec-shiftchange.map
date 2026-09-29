@@ -4,3 +4,4 @@
 # ... -DepMap wsl-deps.avec-shiftchange.map -Language English -Filter '11-shift-change,02-cycle'
 MrBeverage.ShiftChange           3783456242
 nelim.pickletools.screenshotmode path:PickleTools/ScreenshotMode/Mod
+nelim.pickletools.inspecttabs path:PickleTools/InspectTabs/Mod
