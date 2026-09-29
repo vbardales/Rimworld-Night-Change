@@ -56,8 +56,7 @@ Upstream: Night Change is original work. The only source repository is Shift Cha
 port to base on and no pull request owed (BACKLOG.md).
 
 Evidence: no `.dds` and no Pickle evidence was ever tracked in git. `.dds`, `Tests/Pickle/Evidence/`,
-`Tests/Pickle/runs/` and `evidence/` are now in `.gitignore`. The old `.audit/` logs (gitignored, disk only) are superseded by
-`docs/runs/history.md`; deleting the folder was refused by the tool, so it is left for the owner.
+`Tests/Pickle/runs/` and `evidence/` are now in `.gitignore`. The old `.audit/` logs were superseded by `docs/runs/history.md` and the folder was deleted 2026-09-29.
 
 Next transition (`preTest -> done`): write `Tests/Pickle/` for what only a running game shows, or write
 why none applies.
@@ -124,6 +123,8 @@ entry, actual RIMMSQOL/other integrations, restart persistence and new/existing 
 scenarios remain explicitly **unverified**. These are pending validation, not known failures.
 
 ## Audit — 2026-09-13
+
+The `.audit/` logs cited in the 2026-09-13 sections were deleted 2026-09-29; their results are summarised in `docs/runs/history.md`.
 
 Previous stage was empty (not a certified stage). Retained stage: **dansMonoRepo**.
 The stage field uses the literal names of the requested workflow, not legacy codes:
