@@ -1,0 +1,4 @@
+# Pass 6, "sans-biotech": leaves Biotech out of the staged set (only a DLC can be named after !). Plays 13, and the cycle (02).
+#
+# ... -DepMap wsl-deps.sans-biotech.map -Language English -Filter '13-without-biotech,02-cycle'
+!ludeon.rimworld.biotech

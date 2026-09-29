@@ -1,0 +1,6 @@
+# Pass 1 (English) and 2 (French), "sans facultatifs": the minimal set the staging mounts by default (Core, the DLC,
+# Harmony, RimLogging, Pickle, Night Change's hard dependencies and the mod) plus the shared test tool the
+# @review captures need. No optional gameplay mod.
+#
+# powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod NightChange -DepMap wsl-deps.sans-facultatifs.map -Language English -Filter 'Night Change - Pickle tests,!@restart,!@sans-biotech'
+nelim.pickletools.screenshotmode path:PickleTools/ScreenshotMode/Mod

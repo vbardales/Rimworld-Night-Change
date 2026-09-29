@@ -1,0 +1,6 @@
+# Pass 4, "avec-shiftchange": Shift Change (MrBeverage.ShiftChange, Workshop 3783456242), the optional mod whose comp shares
+# the outfit stand def. Night Change loads after it (loadAfter). Plays 11, and the cycle (02) beside it.
+#
+# ... -DepMap wsl-deps.avec-shiftchange.map -Language English -Filter '11-shift-change,02-cycle'
+MrBeverage.ShiftChange           3783456242
+nelim.pickletools.screenshotmode path:PickleTools/ScreenshotMode/Mod

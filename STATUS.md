@@ -8,8 +8,8 @@ packageId:    nelim.nightchange
 repo:         Rimworld-Night-Change
 visibility:   public
 detached:     yes
-stage:        preTest
-workflow_stage: preTest
+stage:        done
+workflow_stage: done
 licence:      open
 licence_at:   LICENSE and Mod/LICENSE, MIT, copyright Nelim 2026; design debt documented in ATTRIBUTION.md
 upstream_mod_remotes:
@@ -19,13 +19,13 @@ showcase:     complete
 tested_on:
 workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-09-23)
 remaining:
-  - feature: no Pickle suite and no written justification of non-applicability (blocks preTest -> done); scope proposed in TESTING.md
-  - blocking (done -> tested): NOT MET - no scenario in @wip (0 scenarios exist, so 0 in @wip)
-  - blocking (done -> tested): NOT MET - conditional scenarios: none written; every @requires (Biotech kid stand, Shift Change, Outfit Stands Plus) still to write and play
-  - blocking (done -> tested): NOT MET - manual tests to validate: 10 in TEST_SCENARIOS.md, none run
-  - unverified: in-game run, logs, EN/FR UI, MainButtons shortcut hidden by default and revealed by RIMMSQOL, new game and existing save
-  - feature: PUBLICATION.md (gallery order, thank-you drafts, adult-content answers) for prepublished
-session:      maj: 2026-09-29, audit AUDIT.md
+  - blocking (done -> tested): NOT MET - no scenario in @wip (0 of 40 scenarios are @wip)
+  - blocking (done -> tested): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
+  - blocking (done -> tested): NOT MET - manual tests to validate: fire, downed, killed or sold borrower, garment removed from the stand, blocked path, and every @review capture still to open
+  - unverified: no Pickle run yet, so the fixture (bedroom at x=30 z=30 on test-colony), timing waits and every scenario are unproven; the raid scenarios are the least stable
+  - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
+  - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
+  - feature: PUBLICATION.md (gallery order, thank-you drafts, adult-content answers) for prepublishedsession:      maj: 2026-09-29, audit AUDIT.md
 updated:      2026-09-29, audit; stage preTest
 ---
 
@@ -33,7 +33,7 @@ updated:      2026-09-29, audit; stage preTest
 
 ## Audit - 2026-09-29 (replaces the 2026-09-13 decision below)
 
-Previous stage: `dansMonoRepo`. Retained: **preTest** (the first gate is now met). Audited revision:
+Previous stage: `dansMonoRepo`. Retained: **done** (first pass gave preTest; the Pickle suite was written the same day, see below). Audited revision:
 `origin/main` 51261b2 plus the uncommitted 2026-09-13 correction set, committed in the same session
 (see git log). RimWorld was not launched.
 
@@ -45,7 +45,7 @@ Previous stage: `dansMonoRepo`. Retained: **preTest** (the first gate is now met
 | -> options | Met: 4 settings, Mod options entry, MainButton shortcut hidden by default (`buttonVisible=false`), 13 offline assertions pass. |
 | -> l10n | Met: 13 Keyed keys EN/FR, 3 French DefInjected, `Check-DefInjected` 0 errors. Plurals (rule of 2026-09-25): the only counted noun is "cells" (slider 3..40, never 1), so no `.One`/`.Many` form is reachable; justified exclusion. |
 | -> preTest | Met: Harmony + Odyssey required, Biotech conditional, Shift Change / Outfit Stands Plus in `loadAfter` only; no LoadFolders. |
-| preTest -> done | **Not met**: `Tests/Pickle/` absent and no sentence saying why. Automated (13) and XML checks re-run green today. |
+| preTest -> done | Met 2026-09-29 (after a first pass that found it not met): Pickle suite written, 14 features / 40 scenarios, step assembly builds, scope justified in `Tests/Pickle/README.md`; automated (13) and XML checks re-run green. Execution is a `done -> tested` criterion. |
 
 Checks re-run 2026-09-29: `dotnet build Tests/NightChange.Tests.csproj -c Release` 0 warnings/errors;
 `NightChange.Tests.exe` 13 assertions passed; `Tests/Check-Xml.ps1` passed (8 XML, 13 keys);
@@ -58,8 +58,7 @@ port to base on and no pull request owed (BACKLOG.md).
 Evidence: no `.dds` and no Pickle evidence was ever tracked in git. `.dds`, `Tests/Pickle/Evidence/`,
 `Tests/Pickle/runs/` and `evidence/` are now in `.gitignore`. The old `.audit/` logs were superseded by `docs/runs/history.md` and the folder was deleted 2026-09-29.
 
-Next transition (`preTest -> done`): write `Tests/Pickle/` for what only a running game shows, or write
-why none applies.
+Next transition (`done -> tested`): play the six passes through the dispatcher, open every `@review` capture, replay the conditional scenarios, and clear the three blocking items in `remaining`.
 
 ## Corrections — 2026-09-13 (superseded 2026-09-29, kept as history)
 

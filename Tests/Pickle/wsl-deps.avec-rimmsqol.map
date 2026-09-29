@@ -1,0 +1,8 @@
+# Pass 3, "avec-rimmsqol": RIMMSQOL, the button-customization mod MOD_SETTINGS.md names, and the shared steps that
+# drive it. Plays 08 only (its tags skip it elsewhere). Ids read from PickleTools/RimmsqolSteps/README.md:
+# MalteSchulze.RIMMSqol is Workshop 1084452457; Harmony is staged first everywhere and is not repeated.
+#
+# ... -DepMap wsl-deps.avec-rimmsqol.map -Language English -Filter '08-rimmsqol-shortcut'
+MalteSchulze.RIMMSqol            1084452457
+nelim.pickletools.rimmsqol      path:PickleTools/RimmsqolSteps/Mod
+nelim.pickletools.screenshotmode path:PickleTools/ScreenshotMode/Mod
