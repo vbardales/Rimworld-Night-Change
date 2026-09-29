@@ -237,10 +237,14 @@ namespace NightChange
             }
 
             float minNow = pawn.GetStatValue(StatDefOf.ComfyTemperatureMin);
-            float minAfter = minNow - delta;
             float roomTemp = bed.Position.GetTemperature(bed.Map);
+            return AllowsTemperature(delta, minNow, roomTemp, NightChangeMod.Settings.coldGuardMargin);
+        }
 
-            return roomTemp >= minAfter + NightChangeMod.Settings.coldGuardMargin;
+        public static bool AllowsTemperature(float insulationDelta, float comfortableMinimum,
+            float roomTemperature, float margin)
+        {
+            return insulationDelta >= 0f || roomTemperature >= comfortableMinimum - insulationDelta + margin;
         }
 
         private static float Insulation(List<Apparel> set)

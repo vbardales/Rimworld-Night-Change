@@ -2,6 +2,7 @@
 <LanguageData>
 
   <NightChange_ModTitle>Night Change</NightChange_ModTitle>
+  <NightChange_SettingsScope>Global settings, shared by all saves. Changes apply to the next decision to change clothes; a change already underway is not restarted. Settings are saved when this window closes.</NightChange_SettingsScope>
 
   <NightChange_SettingInheritOwner>Unassigned stands serve the bed's owner</NightChange_SettingInheritOwner>
   <NightChange_SettingInheritOwnerDesc>A stand with no owner set serves whoever owns a bed in the same room, so a private bedroom needs no setup. Turn this off to require an explicit owner on every stand.</NightChange_SettingInheritOwnerDesc>

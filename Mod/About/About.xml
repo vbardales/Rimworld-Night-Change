@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Night Change</name>
-  <author>nelim</author>
+  <author>Nelim</author>
   <packageId>nelim.nightchange</packageId>
   <supportedVersions>
     <li>1.6</li>
@@ -50,7 +50,9 @@ Written with the help of an AI assistant, which is worth saying plainly.
 
 Thanks to Andreas Pardeike for Harmony, and to MrBeverage, whose Shift Change is MIT licensed and ships its own design notes. Nothing of his mod is reused here, but those notes documented a series of outfit stand pitfalls this mod would otherwise have found in play, and ATTRIBUTION.md lists them one by one.
 
-If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.</description>
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
+
+[url=https://github.com/vbardales/Rimworld-Night-Change]Source code on GitHub[/url]</description>
   <url>https://github.com/vbardales/Rimworld-Night-Change</url>
   <modDependencies>
     <li>

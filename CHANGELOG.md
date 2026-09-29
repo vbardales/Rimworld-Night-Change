@@ -7,6 +7,14 @@ This file serves the repository and the Steam release notes; RimWorld does not d
 
 First release. RimWorld 1.6. Requires **Odyssey** (for the outfit stand) and **Harmony**.
 
+### Audit corrections — 2026-09-13
+
+- Add an optional hidden MainButtons shortcut to the native settings dialog.
+- Explain settings scope and application timing in English and French.
+- Normalize out-of-range and non-finite saved numeric settings.
+- Add offline settings/Scribe tests, XML checks and final game test scenarios.
+- Add the repository link at the end of the About description and a cyan Preview accent.
+
 ### The evening change
 
 - A colonist going to bed of their own accord stops at the stand in their bedroom, puts on whatever
@@ -53,3 +61,7 @@ First release. RimWorld 1.6. Requires **Odyssey** (for the outfit stand) and **H
 - Unassigned stands serve the bed's owner (on).
 - Refuse the change when the bedroom is too cold (on), with a margin in degrees.
 - Maximum distance between bed and stand.
+
+## [0.1.0] — 2026-09-23
+
+Creation of the publishIdFile: first upload, whose only purpose is to create the (private) Workshop item and obtain `About/PublishedFileId.txt` (item 3806765493). `Mod/` as it stood at the uploaded commit; not a tested release.

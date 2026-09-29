@@ -62,6 +62,17 @@ order.
 
 ## Building
 
+Open **Mod options -> Night Change** to edit global settings. Changes affect the next
+clothing decision and are saved on closing the window. The optional `NightChange_Settings`
+MainButton is hidden by default; RIMMSQOL or another MainButtons customization tool can
+reveal it. It opens the same native settings window and does not require another mod.
+Interactive integration verification is still pending; see `TEST_SCENARIOS.md`.
+
+For offline settings tests, build `Tests/NightChange.Tests.csproj -c Release`, then run
+`.build/tests/NightChange.Tests.exe` with the installed game's Managed directory and a
+temporary output directory as its two arguments. This console test program does not launch
+RimWorld. Run `Tests/Check-Xml.ps1` for resource checks. See `Tests/RESULTS.md` for limits.
+
 ```
 dotnet build Source/NightChange.csproj -c Release
 ```

@@ -27,6 +27,13 @@ namespace NightChange
         /// <summary>Maximum distance, in cells, between the bed and the stand.</summary>
         public int maxStandDistance = 12;
 
+        public void Normalize()
+        {
+            coldGuardMargin = float.IsNaN(coldGuardMargin) || float.IsInfinity(coldGuardMargin)
+                ? 2f : (float)Math.Round(Math.Max(0f, Math.Min(10f, coldGuardMargin)));
+            maxStandDistance = Math.Max(3, Math.Min(40, maxStandDistance));
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -34,15 +41,21 @@ namespace NightChange
             Scribe_Values.Look(ref coldGuard, "coldGuard", true);
             Scribe_Values.Look(ref coldGuardMargin, "coldGuardMargin", 2f);
             Scribe_Values.Look(ref maxStandDistance, "maxStandDistance", 12);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                Normalize();
+            }
         }
     }
 
     public class NightChangeMod : Mod
     {
         public static NightChangeSettings Settings;
+        public static NightChangeMod Instance { get; private set; }
 
         public NightChangeMod(ModContentPack content) : base(content)
         {
+            Instance = this;
             Settings = GetSettings<NightChangeSettings>();
             new Harmony("nelim.nightchange").PatchAll();
         }
@@ -53,6 +66,8 @@ namespace NightChange
         {
             var list = new Listing_Standard();
             list.Begin(inRect);
+            list.Label("NightChange_SettingsScope".Translate());
+            list.Gap();
 
             list.CheckboxLabeled("NightChange_SettingInheritOwner".Translate(),
                 ref Settings.inheritOwnerFromBed, "NightChange_SettingInheritOwnerDesc".Translate());

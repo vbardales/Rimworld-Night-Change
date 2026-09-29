@@ -2,6 +2,9 @@
 # Directory.Build.props les envoie hors du dossier du mod : ils ne doivent jamais s'y retrouver,
 # le dossier entier partant tel quel sur le Workshop.
 .build/
+.audit/
+Tests/obj/
+Tests/bin/
 Source/obj/
 Source/bin/
 
@@ -22,3 +25,18 @@ desktop.ini
 # Internal art brief, kept out of the public repository: it is a working note in French,
 # and the repository documentation is English.
 PROMPT_*.md
+
+# Claude Code session worktrees and local settings.
+.claude/
+
+# Compiled DirectDraw textures: a build product of a PNG source, large. Never tracked; stays on disk.
+*.dds
+
+# Pickle run evidence (captures, films, reports, logs) stays on disk and out of git: it can reach
+# gigabytes. What is committed is one text line per run in docs/runs/.
+Tests/Pickle/Evidence/
+Tests/Pickle/runs/
+evidence/
+
+# Local Windows folder icons (derived from Mod/About/Preview.png); never shipped.
+*.ico

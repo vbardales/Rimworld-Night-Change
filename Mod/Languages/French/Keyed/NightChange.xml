@@ -2,6 +2,7 @@
 <LanguageData>
 
   <NightChange_ModTitle>Night Change</NightChange_ModTitle>
+  <NightChange_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la prochaine décision de se changer ; un changement de tenue déjà en cours ne redémarre pas. Les réglages sont enregistrés à la fermeture de cette fenêtre.</NightChange_SettingsScope>
 
   <NightChange_SettingInheritOwner>Un portant libre sert le propriétaire du lit</NightChange_SettingInheritOwner>
   <NightChange_SettingInheritOwnerDesc>Un portant sans propriétaire assigné sert celui à qui appartient un lit de la même pièce : une chambre ne demande donc aucun réglage. Décochez pour exiger un propriétaire explicite sur chaque portant.</NightChange_SettingInheritOwnerDesc>
