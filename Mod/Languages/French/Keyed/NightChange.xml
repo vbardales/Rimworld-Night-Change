@@ -4,20 +4,20 @@
   <NightChange_ModTitle>Night Change</NightChange_ModTitle>
   <NightChange_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la prochaine décision de se changer ; un changement de tenue déjà en cours ne redémarre pas. Les réglages sont enregistrés à la fermeture de cette fenêtre.</NightChange_SettingsScope>
 
-  <NightChange_SettingInheritOwner>Un portant libre sert le propriétaire du lit</NightChange_SettingInheritOwner>
-  <NightChange_SettingInheritOwnerDesc>Un portant sans propriétaire assigné sert celui à qui appartient un lit de la même pièce : une chambre ne demande donc aucun réglage. Décochez pour exiger un propriétaire explicite sur chaque portant.</NightChange_SettingInheritOwnerDesc>
+  <NightChange_SettingInheritOwner>Un portant libre sert la personne qui possède le lit</NightChange_SettingInheritOwner>
+  <NightChange_SettingInheritOwnerDesc>Un portant sans propriétaire assigné sert la personne à qui appartient un lit de la même pièce : une chambre ne demande donc aucun réglage. Décochez pour exiger une assignation explicite sur chaque portant.</NightChange_SettingInheritOwnerDesc>
 
   <NightChange_SettingColdGuard>Refuser le changement si la chambre est trop froide</NightChange_SettingColdGuard>
-  <NightChange_SettingColdGuardDesc>La tenue de nuit remplace les habits de jour au lieu de se porter par-dessus : le changement peut donc coûter son isolation au colon. Cette option compare les deux et renonce quand la chambre est plus froide que ce que le colon supporterait ensuite.</NightChange_SettingColdGuardDesc>
+  <NightChange_SettingColdGuardDesc>La tenue de nuit remplace les habits de jour au lieu de se porter par-dessus : le changement peut donc coûter de l'isolation à la personne concernée. Cette option compare les deux et renonce quand la chambre est plus froide que ce que cette personne supporterait ensuite.</NightChange_SettingColdGuardDesc>
 
   <NightChange_SettingColdMargin>Marge de sécurité : {0} °C</NightChange_SettingColdMargin>
   <NightChange_SettingDistance>Distance maximale entre le lit et le portant : {0} cases</NightChange_SettingDistance>
 
-  <NightChange_AssignGizmo>Choisir le dormeur</NightChange_AssignGizmo>
-  <NightChange_AssignGizmoDesc>Désigne qui se change à ce portant avant de se coucher. Laissé libre, il sert celui à qui appartient un lit de la même pièce.</NightChange_AssignGizmoDesc>
+  <NightChange_AssignGizmo>Choisir qui dort ici</NightChange_AssignGizmo>
+  <NightChange_AssignGizmoDesc>Désigne qui se change à ce portant avant de se coucher. Laissé libre, il sert la personne à qui appartient un lit de la même pièce.</NightChange_AssignGizmoDesc>
 
   <NightChange_ChangeBackGizmo>Se rhabiller maintenant</NightChange_ChangeBackGizmo>
-  <NightChange_ChangeBackGizmoDesc>Interrompt {0} pour qu'il vienne reprendre ses propres habits.</NightChange_ChangeBackGizmoDesc>
+  <NightChange_ChangeBackGizmoDesc>Interrompt {0} et l'envoie reprendre ses propres habits.</NightChange_ChangeBackGizmoDesc>
 
   <NightChange_InspectInUse>Contient les habits de {0}</NightChange_InspectInUse>
 
