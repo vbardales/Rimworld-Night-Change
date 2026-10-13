@@ -18,15 +18,14 @@ showcase:     complete
 tested_on:
 workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-09-23)
 remaining:
-  - blocking (playTests -> shootGallery): NOT MET - no scenario in @wip (0 of 40 scenarios are @wip)
   - blocking (playTests -> shootGallery): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
   - blocking (playTests -> shootGallery): NOT MET - manual tests to validate: fire, downed, killed or sold borrower, garment removed from the stand, blocked path, and every @review capture still to open
   - blocking (writeTests -> playTests, AUDIT.md 7.g): NOT MET - French review by Virginie not done, so translation_fr stays partial (TRANSLATIONS.md section 3, 2026-09-30); French files listed under Translation audit
   - unverified: Pickle suite. First runs 2026-09-29 (p1 24/36, p2 24/36, p3 3/3, p4 6/7, p5 2/2, p6 abandoned) exposed four suite defects, fixed in ff6b493 and 2514004. Reruns p1, p2, p4, p6 (ids 06cf, a589, 056b, 15ed) were submitted on 3e54c1c; the French files changed on disk right after, so those reruns may stage the reworded French
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
-  - feature: PUBLICATION.md (gallery order, thank-you drafts, adult-content answers) for prepublishedsession:      maj: 2026-09-29, audit AUDIT.md
-updated:      2026-09-29, audit; stage preTest
+  - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
+updated:      2026-10-13, writeTests[1.0.0]; PUBLICATION.md written, French review owed
 protocols_read_sha: 92cd25e11ff11424d3d28b4170ea845fa4f2e227
 ---
 
