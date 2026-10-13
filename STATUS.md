@@ -2,7 +2,7 @@
 localization: complete
 translation_en: complete
 translation_fr: partial
-settings_audit: complete
+settings_audit: partial
 mod:          Night Change
 packageId:    nelim.nightchange
 repo:         Rimworld-Night-Change
