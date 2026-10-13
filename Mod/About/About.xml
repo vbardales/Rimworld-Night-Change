@@ -14,13 +14,13 @@ Put a vanilla outfit stand in a bedroom and hang a set of night clothes on it. W
 
 A stand in a private bedroom needs no setup at all: it serves whoever owns the bed in the room. Set owners on it for a barracks, where several colonists could otherwise lay claim to the same stand.
 
-WHY THIS IS WORTH A MOD
+Why this is worth a mod
 
-Nothing dresses a colonist for bed. Pyjama mods exist and say so themselves: they ship the clothes and leave the wearing to you, which in practice means never. Shift Change dresses colonists for the room they work or relax in and states plainly that it leaves the bed alone, because vanilla gives patients recreation they can take lying down and nobody should be pulled out of bed for a wardrobe. This mod is the other half, and the two sit side by side without touching: a bedroom is not a work room, so neither claims the other's stand.
+Nothing dresses a colonist for bed. Pyjama mods exist and say so themselves: they ship the clothes and leave the wearing to you, which in practice means never. Shift Change (https://steamcommunity.com/sharedfiles/filedetails/?id=3783456242) dresses colonists for the room they work or relax in and states plainly that it leaves the bed alone, because vanilla gives patients recreation they can take lying down and nobody should be pulled out of bed for a wardrobe. This mod is the other half, and the two sit side by side without touching: a bedroom is not a work room, so neither claims the other's stand.
 
 The point is not the clothes. It is that going to bed becomes a thing a colonist does rather than a state they enter. Night clothes usually trade work speed and armour for comfort, which the game already prices; the mod simply makes the trade happen at the right hour without you clicking.
 
-WHAT IT WILL NOT DO
+What it will not do
 
 Deliberately narrow, so it never fights you.
 
@@ -30,29 +30,39 @@ Deliberately narrow, so it never fights you.
 - Nobody is pulled out of bed. Watching television in bed, meditating in bed and resting after surgery all leave the night clothes on; the change back happens when they get up for good.
 - Getting dressed happens before the day's work, but after fleeing a fire, after seeking a safe temperature and after emergency work.
 
-THE COLD
+The cold
 
 Unlike a lab coat, night clothes replace what the colonist is wearing rather than layering over it, so a full change can strip a colonist of their insulation. Sleeping in a freezing bedroom in nothing but a nightshirt is a real way to die, and vanilla does not protect against it because nothing normally sends anyone there.
 
 So the mod checks. It compares the insulation the night clothes give against the insulation the day clothes gave, applies the difference to the colonist's own comfortable minimum, and refuses the change when the bedroom is colder than that. The safety margin is adjustable, and the whole check can be turned off.
 
-SETTINGS
+Settings
 
 - Unassigned stands serve the owner of the bed in the room. On by default.
 - Refuse the change when the bedroom is too cold, with an adjustable margin.
 - Maximum distance between bed and stand.
 
+They are under Options, Mod options, Night Change. English and French.
+
 Adds no clothing, no buildings and no art of its own. It uses the vanilla outfit stand and whatever you hang on it. Vanilla has nothing that reads as night clothes, so any apparel mod that adds pyjamas, robes or nightgowns is worth having alongside.
 
-CREDITS
-
-Written with the help of an AI assistant, which is worth saying plainly.
-
-Thanks to Andreas Pardeike for Harmony, and to MrBeverage, whose Shift Change is MIT licensed and ships its own design notes. Nothing of his mod is reused here, but those notes documented a series of outfit stand pitfalls this mod would otherwise have found in play, and ATTRIBUTION.md lists them one by one.
+If I go quiet
 
 If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
 
-[url=https://github.com/vbardales/Rimworld-Night-Change]Source code on GitHub[/url]</description>
+AI-generated
+
+Written with the help of an AI assistant (Claude Code, Anthropic), under human direction and review. The preview image and the mod icon were generated with an AI image tool.
+
+Thanks
+
+Thanks to Andreas Pardeike for Harmony (https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077), and to MrBeverage, whose Shift Change (https://steamcommunity.com/sharedfiles/filedetails/?id=3783456242) is MIT licensed and ships its own design notes. Nothing of his mod is reused here, but those notes documented a series of outfit stand pitfalls this mod would otherwise have found in play, and ATTRIBUTION.md lists them one by one.
+
+Pickle (https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678), RimLogging (https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696) and PickleTools (https://steamcommunity.com/sharedfiles/filedetails/?id=3806142401) were used for testing only; none is a dependency of the distributed mod.
+
+Credits and licence: see ATTRIBUTION.md and LICENSE (MIT) in the repository.
+
+Source code on GitHub (https://github.com/vbardales/Rimworld-Night-Change)</description>
   <url>https://github.com/vbardales/Rimworld-Night-Change</url>
   <modDependencies>
     <li>
