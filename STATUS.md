@@ -1,14 +1,14 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: partial
+translation_fr: complete
 settings_audit: partial
 mod:          Night Change
 packageId:    nelim.nightchange
 repo:         Rimworld-Night-Change
 visibility:   public
 detached:     yes
-workflow_stage: writeTests[1.0.0]
+workflow_stage: playTests[1.0.0]
 licence:      open
 licence_at:   LICENSE and Mod/LICENSE, MIT, copyright Nelim 2026; design debt documented in ATTRIBUTION.md
 upstream_mod_remotes:
@@ -20,13 +20,12 @@ workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-0
 remaining:
   - blocking (playTests -> shootGallery): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
   - blocking (playTests -> shootGallery): NOT MET - manual tests to validate: fire, downed, killed or sold borrower, garment removed from the stand, blocked path, and every @review capture still to open
-  - blocking (writeTests -> playTests, AUDIT.md 7.g): NOT MET - French review by Virginie not done, so translation_fr stays partial (TRANSLATIONS.md section 3, 2026-09-30); French files listed under Translation audit
   - unverified: Pickle suite. First runs 2026-09-29 (p1 24/36, p2 24/36, p3 3/3, p4 6/7, p5 2/2, p6 abandoned) exposed four suite defects, fixed in ff6b493 and 2514004. Reruns p1, p2, p4, p6 (ids 06cf, a589, 056b, 15ed) were submitted on 3e54c1c; the French files changed on disk right after, so those reruns may stage the reworded French
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
-updated:      2026-10-13, writeTests[1.0.0]; PUBLICATION.md written, French review owed
-protocols_read_sha: 86cf2bf7fd989021fbad0ac45602a2109a7a3aa7
+updated:      2026-10-13, playTests[1.0.0]; French review done by Virginie
+protocols_read_sha: 65e09838c8023b798d4ba0ff04df04284a96f11e
 ---
 
 # Night Change - status
@@ -36,7 +35,7 @@ protocols_read_sha: 86cf2bf7fd989021fbad0ac45602a2109a7a3aa7
 French lives in `Mod/Languages/French/Keyed/NightChange.xml`, `DefInjected/JobDef/NightChange_Jobs.xml` and `DefInjected/MainButtonDef/NightChange.xml`. No grammar files.
 
 - 2026-09-30, gender-agreement read (session): every French text read. Six Keyed strings agreed with a pawn in the masculine only (`celui`, `il`, `le colon`, `le dormeur`, `propriétaire explicite`); all reworded with no agreement (`la personne`, `l'envoie`, `Choisir qui dort ici`), so no `{PAWN_gender}` switch was needed. Unsure, for Virginie: `portant` for outfit stand, `Choisir qui dort ici` as the button label, `habits` vs `tenue`.
-- French review by Virginie: not done.
+- French review by Virginie: done 2026-10-13, reviewer Virginie, FRENCH_REVIEW.md generated from revision 10ee883 (French texts unchanged since 76f89a3); corrections requested: none recorded, she validated the translation in chat. The English sentence changed in the Steam description at 10ee883 is read with PUBLICATION.md at writeDocs (no separate About review, AUDIT.md 11.j).
 
 ## Audit - 2026-09-29 (replaces the 2026-09-13 decision below)
 
