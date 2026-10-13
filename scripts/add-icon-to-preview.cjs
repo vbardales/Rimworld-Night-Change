@@ -3,7 +3,7 @@
 // corner of the delivered Preview, tilted +15deg in a left corner, -15deg in a right one
 // (PUBLISHING.md, rule of 2026-09-29). Reads Art/Preview-without-icon.png, writes
 // Art/ModIcon-cutout.png and Art/Preview-with-icon.png. Run with NODE_PATH set to a node_modules
-// that holds sharp. Usage: node _tools/add-icon-to-preview.cjs [right|left] [size]
+// that holds sharp. Usage: node scripts/add-icon-to-preview.cjs [right|left] [size]
 const sharp = require('sharp');
 const path = require('path');
 const root = path.resolve(__dirname, '..');

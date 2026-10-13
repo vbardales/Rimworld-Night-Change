@@ -69,7 +69,7 @@ reveal it. It opens the same native settings window and does not require another
 Interactive integration verification is still pending; see `TEST_SCENARIOS.md`.
 
 For offline settings tests, build `Tests/NightChange.Tests.csproj -c Release`, then run
-`.build/tests/NightChange.Tests.exe` with the installed game's Managed directory and a
+`build/tests/NightChange.Tests.exe` with the installed game's Managed directory and a
 temporary output directory as its two arguments. This console test program does not launch
 RimWorld. Run `Tests/Check-Xml.ps1` for resource checks. See `Tests/RESULTS.md` for limits.
 

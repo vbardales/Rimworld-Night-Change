@@ -1,0 +1,51 @@
+{
+  "title": "Night Change",
+  "titleSize": 48,
+  "titleParts": [{ "text": "Night Change" }],
+  "suffix": "",
+  "tag": "",
+  "tagInline": true,
+  "copyLines": [
+    "Colonists change into night clothes",
+    "on their way to bed."
+  ],
+  "layout": "panel",
+  "panelAnchor": "top-left",
+  "backgroundFile": "Preview-source.png",
+  "backgroundPosition": "center",
+  "backgroundSize": "cover",
+  "echo": {
+    "file": "echo.png",
+    "preSized": true,
+    "mode": "alpha",
+    "color": "var(--accent)",
+    "width": 185,
+    "height": 170,
+    "opacity": 1,
+    "veil": false,
+    "panelTop": 34,
+    "panelRight": 1,
+    "panelWidth": 32,
+    "flipX": true
+  },
+  "iconBadge": {
+    "file": "ModIcon-source.png",
+    "corner": "bottom-right",
+    "width": 180,
+    "translate": "-12%, -12%",
+    "rotate": -15,
+    "radius": 48,
+    "outline": false,
+    "veil": "radial",
+    "veilSize": 250,
+    "veilRight": -45,
+    "veilBottom": -45
+  },
+  "palette": {
+    "veil": "#081323",
+    "inkPrimary": "#F3EFE7",
+    "inkSecondary": "#6D9BD1",
+    "accent": "#00C8F0",
+    "badgeInk": "#07111F"
+  }
+}

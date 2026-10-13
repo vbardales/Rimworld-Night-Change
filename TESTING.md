@@ -5,7 +5,7 @@ Functional scenarios: `TEST_SCENARIOS.md` (18 rows, the manual originals, none r
 ## Offline (green 2026-09-29)
 
 - `dotnet build Tests/NightChange.Tests.csproj -c Release --nologo`
-- `.build/tests/NightChange.Tests.exe "<RimWorld Managed dir>" <tmp dir>` (13 assertions)
+- `build/tests/NightChange.Tests.exe "<RimWorld Managed dir>" <tmp dir>` (13 assertions)
 - `powershell -File Tests/Check-Xml.ps1`
 - `scripts/Check-DefInjected.ps1 -TransMod <folder>/Mod` (monorepo script)
 

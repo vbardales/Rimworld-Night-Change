@@ -1,7 +1,7 @@
 # Intermediaires de compilation.
 # Directory.Build.props les envoie hors du dossier du mod : ils ne doivent jamais s'y retrouver,
 # le dossier entier partant tel quel sur le Workshop.
-.build/
+build/
 .audit/
 Tests/obj/
 Tests/bin/
@@ -20,6 +20,7 @@ Source/bin/
 # Systeme
 Thumbs.db
 desktop.ini
+Art/.render/
 .DS_Store
 
 # Internal art brief, kept out of the public repository: it is a working note in French,
