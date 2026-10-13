@@ -15,7 +15,7 @@ Colonists change into night clothes on their way to bed, and back out of them wh
 
 Put a vanilla outfit stand in a bedroom and hang a set of night clothes on it. When the colonist who sleeps there goes to bed of their own accord, they stop at the stand, change, and go to sleep. Their day clothes wait in the stand overnight and come back exactly as they were, force-worn markers included.
 
-A stand in a private bedroom needs no setup at all: it serves whoever owns the bed in the room. Set owners on it for a barracks, where several colonists could otherwise lay claim to the same stand.
+A stand in a private bedroom needs no setup at all: it serves whoever owns the bed in the room. In a barracks, assign an owner to each stand, since several colonists could otherwise lay claim to the same one.
 
 **Why this is worth a mod**
 
