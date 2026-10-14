@@ -278,12 +278,44 @@ namespace NightChange.PickleSteps
             Faction enemy = Find.FactionManager.RandomEnemyFaction(allowHidden: false, allowDefeated: false,
                 allowNonHumanlike: false);
             ctx.Require(enemy != null, "the world has no hostile humanlike faction to send a raider from");
-            Pawn raider = PawnGenerator.GeneratePawn(PawnKindDefOf.Pirate, enemy);
-            GenSpawn.Spawn(raider, CellFinder.RandomEdgeCell(map), map);
-            ctx.Assert(raider.Spawned, "the raider did not spawn");
+            // One raider is not enough (assumption): the danger watcher may need several hostiles to leave
+            // StoryDanger.None. Ticket A, 2026-10-14: a lone raider never moved it in 1800 ticks.
+            List<Pawn> raiders = new List<Pawn>();
+            for (int i = 0; i < 4; i++)
+            {
+                Pawn raider = PawnGenerator.GeneratePawn(PawnKindDefOf.Pirate, enemy);
+                GenSpawn.Spawn(raider, CellFinder.RandomEdgeCell(map), map);
+                ctx.Assert(raider.Spawned, "a raider did not spawn");
+                raiders.Add(raider);
+            }
+
             // The danger watcher counts only hostiles that belong to an active lord, not a lone pawn.
-            LordMaker.MakeNewLord(enemy, new LordJob_AssaultColony(enemy), map,
-                new List<Pawn> { raider });
+            LordMaker.MakeNewLord(enemy, new LordJob_AssaultColony(enemy), map, raiders);
+        }
+
+        /// <summary>
+        /// Diagnostic for ticket B (2026-10-14): who dresses the sleeper after "Change back now", and
+        /// what both ledgers say. Written to the game log as a warning, read from Player.log.
+        /// </summary>
+        [Then("Night Change: report the state of {string}")]
+        public void ReportState(PickleContext ctx, string name)
+        {
+            Pawn pawn = Driver.Pawn(ctx, name);
+            Building_OutfitStand stand = Driver.Stand(ctx);
+            CompNightStand ours = stand.GetComp<CompNightStand>();
+            ThingComp theirs = stand.AllComps.FirstOrDefault(c => c.GetType().FullName != null
+                && c.GetType().FullName.StartsWith("ShiftChange.CompShiftStand", StringComparison.Ordinal));
+            object theirBorrower = theirs?.GetType().GetProperty("Borrower")?.GetValue(theirs, null);
+            string worn = string.Join(", ", pawn.apparel.WornApparel.Select(a => a.def.defName).ToArray());
+            string held = string.Join(", ", stand.HeldItems.Select(t => t.def.defName).ToArray());
+            string queue = string.Join(", ", pawn.jobs.jobQueue.Select(q => q.job.def.defName).ToArray());
+            Log.Warning("[NightChange diag] tick " + Find.TickManager.TicksGame + ", " + name
+                + ": job=" + (pawn.CurJob?.def.defName ?? "none")
+                + ", queue=[" + queue + "], worn=[" + worn + "], stand holds=[" + held + "]"
+                + ", NightChange borrower=" + (ours?.Borrower?.LabelShort ?? "none")
+                + ", ShiftChange comp=" + (theirs == null ? "absent" : "present")
+                + ", ShiftChange borrower=" + ((theirBorrower as Pawn)?.LabelShort ?? "none")
+                + ", timetable=" + pawn.timetable?.CurrentAssignment?.defName);
         }
 
         // ------------------------------------------------------------------ waits

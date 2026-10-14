@@ -89,5 +89,8 @@ Feature: the evening change and the morning return
     And Night Change: the stand offers the gizmo keyed "NightChange_ChangeBackGizmo"
     When Nelim's Pickle Tools: I select the thing of def "Building_OutfitStand" at (33, 34)
     And Nelim's Pickle Tools: I click the gizmo keyed "NightChange_ChangeBackGizmo"
+    And Night Change: report the state of "Alice"
+    And I wait 120 ticks
+    And Night Change: report the state of "Alice"
     Then Night Change: "Alice" ends up wearing "Apparel_Parka"
     And Night Change: the stand has no borrower
