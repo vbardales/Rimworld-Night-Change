@@ -20,7 +20,7 @@ workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-0
 remaining:
   - blocking (playTests -> shootGallery): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
   - blocking (playTests -> shootGallery): NOT MET - manual tests to validate: fire, downed, killed or sold borrower, garment removed from the stand, blocked path, and every @review capture still to open
-  - unverified: Pickle suite. First runs 2026-09-29 (p1 24/36, p2 24/36, p3 3/3, p4 6/7, p5 2/2, p6 abandoned) exposed four suite defects, fixed in ff6b493 and 2514004. Reruns p1, p2, p4, p6 (ids 06cf, a589, 056b, 15ed) were submitted on 3e54c1c; the French files changed on disk right after, so those reruns may stage the reworded French
+  - unverified: Pickle suite. First runs 2026-09-29 and tickets A, B, C of 2026-10-14 (history.md): red = raid scenario (danger step), "Change back now" with Shift Change (borrower stays; suspect an interaction, not diagnosed), sans-biotech pass (vanilla NRE on the Biotech-made fixture save). Everything else of p1, p2, p3 and p5 was green on earlier runs
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
