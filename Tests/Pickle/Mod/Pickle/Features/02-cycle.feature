@@ -92,5 +92,7 @@ Feature: the evening change and the morning return
     And Night Change: report the state of "Alice"
     And I wait 120 ticks
     And Night Change: report the state of "Alice"
+    And I wait 600 ticks
+    And Night Change: report the state of "Alice"
     Then Night Change: "Alice" ends up wearing "Apparel_Parka"
     And Night Change: the stand has no borrower
