@@ -9,7 +9,7 @@ Functional scenarios: `TEST_SCENARIOS.md` (18 rows, the manual originals, none r
 - `powershell -File Tests/Check-Xml.ps1`
 - `scripts/Check-DefInjected.ps1 -TransMod <folder>/Mod` (monorepo script)
 
-## Pickle suite (written 2026-09-29, never run)
+## Pickle suite (written 2026-09-29, run 2026-09-29 to 2026-10-14, see docs/runs/history.md)
 
 Scope, features, passes and the fixture: [Tests/Pickle/README.md](Tests/Pickle/README.md). Six passes:
 without optional mods (English, French), with RIMMSQOL, with Shift Change, restart chain, without Biotech.

@@ -37,26 +37,34 @@
     </value>
   </Operation>
 
-  <!-- Biotech's kid outfit stand, whose class derives from Building_OutfitStand. -->
-  <Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Biotech">
-    <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]/comps</xpath>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]</xpath>
-      <value>
-        <comps />
-      </value>
-    </nomatch>
-  </Operation>
-
-  <Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Biotech">
-    <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]/comps</xpath>
-    <value>
-      <li Class="CompProperties_AssignableToPawn">
-        <compClass>NightChange.CompNightStand</compClass>
-        <maxAssignedPawnsCount>1</maxAssignedPawnsCount>
-        <drawAssignmentOverlay>false</drawAssignmentOverlay>
-      </li>
-    </value>
+  <!-- Biotech's kid outfit stand, whose class derives from Building_OutfitStand. Guarded by the def
+       itself, which only exists with Biotech: no MayRequire on an Operation (AUDIT.md 4.b), and
+       nothing happens, and nothing is logged, without the DLC. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]/comps</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]</xpath>
+            <value>
+              <comps />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="Building_KidOutfitStand"]/comps</xpath>
+          <value>
+            <li Class="CompProperties_AssignableToPawn">
+              <compClass>NightChange.CompNightStand</compClass>
+              <maxAssignedPawnsCount>1</maxAssignedPawnsCount>
+              <drawAssignmentOverlay>false</drawAssignmentOverlay>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
   </Operation>
 
 </Patch>

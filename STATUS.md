@@ -20,15 +20,32 @@ workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-0
 remaining:
   - blocking (playTests -> shootGallery): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
   - blocking (playTests -> shootGallery): NOT MET - manual tests to validate: fire, downed, killed or sold borrower, garment removed from the stand, blocked path, and every @review capture still to open
-  - unverified: Pickle suite. First runs 2026-09-29 and tickets A, B, C of 2026-10-14 (history.md): red = raid scenario (danger step), "Change back now" with Shift Change (borrower stays; suspect an interaction, not diagnosed), sans-biotech pass (vanilla NRE on the Biotech-made fixture save). Everything else of p1, p2, p3 and p5 was green on earlier runs
+  - blocking (playTests -> shootGallery): defect B, open: with Shift Change, after "Change back now" the sleeper's job is ShiftChange_SwapAtStand (their job, not ours), Alice wears shirt and trousers, the parka stays on the stand and NightChange still names her borrower (ticket B2, 2026-10-14, diag lines in Player.log); not yet known whether that job ends or loops
+  - blocking (playTests -> shootGallery): the without-Biotech pass (13) cannot run: the test-colony save was made with Biotech and vanilla throws a NullReferenceException (ListerHaulables, Building_Grave.Accepts, ThingFilter.Allows) on load without it; needs another fixture. 12 (with Biotech) is green
+  - unverified: after the 2026-10-15 patch change (see Audit replay) 12 must be replayed alone; raid scenarios green (A2, four raiders), settings 07 and restart chain 09/10 green on earlier runs, RIMMSQOL 08 green (p3 3/3)
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
-updated:      2026-10-13, playTests[1.0.0]; French review done by Virginie
-protocols_read_sha: 65e09838c8023b798d4ba0ff04df04284a96f11e
+updated:      2026-10-15, playTests[1.0.0]; audit replayed 1 to 8
+protocols_read_sha: 1397cf3608b1a670fceaf0050eda16021b805fde
 ---
 
 # Night Change - status
+
+## Audit replay - 2026-10-15
+
+Replayed against the protocols as of 86cf2bf7 plus the 2026-10-15 changes (markers moved to the Workflow Board, gallery subtitles, tag check: none touches the mod). Revision `b8794fc` plus the changes below. RimWorld not launched by the session; Pickle ran through tickets.
+
+| Step | Result |
+| --- | --- |
+| 3.b build | Met. Source build 0 warnings, 0 errors. The rebuilt DLL differs from the shipped one byte for byte (1250360F vs DA2890A6, not the pdb path: same with the old build folder), but the decompiled C# of both is identical (ilspycmd diff, only the csproj name differs), so the shipped DLL is these sources. |
+| 4 dependencies | **Defect found and fixed.** `Mod/Patches/NightChange_OutfitStand.xml` put `MayRequire` on two `<Operation>` elements, which AUDIT.md 4.b forbids. The kid-stand patch is now guarded by the def's existence (PatchOperationConditional, then a sequence): same effect with Biotech, nothing and no log without it. About: Harmony and Odyssey required, Biotech conditional, Shift Change and Outfit Stands Plus in loadAfter only, no LoadFolders. |
+| 5 settings | `settings_audit: partial`: analysis, 13 offline assertions green, in-game 07 and 09/10 green on 2026-09-30; the RIMMSQOL route 08 green (p3). Complete needs the settings captures read and the shortcut checked in the revision tested. |
+| 6 localization | Met. `translation_en` and `translation_fr` complete, French reviewed by Virginie 2026-10-13. |
+| 7 writeTests | Met. Offline checks replayed today: build 0/0, 13 assertions, Check-Xml (its last-line check now expects the plain `Source code on GitHub (url)` the description generator writes), Check-DefInjected 0 errors, Check-Status 0 errors. |
+| 8 playTests | Open: see remaining. No `code_review_sha` yet (8.m, due before shootGallery, and the patch change above reopens any earlier review). No `tested_on` yet. |
+
+Stage kept at playTests: the defect found is fixed in the same change, and the transition out of playTests is what the open items block.
 
 ## Translation audit
 

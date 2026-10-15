@@ -34,7 +34,7 @@ foreach ($name in @('Preview', 'ModIcon')) {
     $img.Dispose()
 }
 [xml]$about = Get-Content Mod/About/About.xml -Raw
-if (!$about.ModMetaData.description.Trim().EndsWith('[url=https://github.com/vbardales/Rimworld-Night-Change]Source code on GitHub[/url]')) { throw 'Missing final repository link' }
+if (!$about.ModMetaData.description.Trim().EndsWith('Source code on GitHub (https://github.com/vbardales/Rimworld-Night-Change)')) { throw 'Missing final repository link' }
 [xml]$buttons = Get-Content Mod/Defs/NightChange_MainButtons.xml -Raw
 $button = $buttons.Defs.MainButtonDef
 if ($button.buttonVisible -ne 'false' -or $button.workerClass -ne 'NightChange.MainButtonWorker_NightChangeSettings') { throw 'Shortcut contract mismatch' }
