@@ -31,6 +31,7 @@ Feature: the text is in the language of the pass
     And Night Change: the stand offers the gizmo keyed "NightChange_ChangeBackGizmo"
     And Night Change: the stand's inspect line names "Alice"
     When Nelim's Pickle Tools: I select the thing of def "Building_OutfitStand" at (33, 34)
+    And I take a screenshot "night change, the stand with its gizmo bar"
     And Nelim's Pickle Tools: screenshot mode is enabled around the open windows
     And I take a screenshot "night change, the stand with its borrower and its gizmos"
     And Nelim's Pickle Tools: screenshot mode is disabled

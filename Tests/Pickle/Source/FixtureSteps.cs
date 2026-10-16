@@ -267,6 +267,96 @@ namespace NightChange.PickleSteps
             PawnBanishUtility.Banish(pawn, pawn.Map.Tile);
         }
 
+        [When("Night Change: {string} is killed")]
+        public void Kill(PickleContext ctx, string name) => Driver.Pawn(ctx, name).Kill(null);
+
+        /// <summary>
+        /// The call chain of a sale: Pawn.PreTraded with TradeAction.PlayerSells, which is where vanilla
+        /// reaches Pawn_Ownership.UnclaimAll, then the pawn leaves the map. The trade window itself is
+        /// not driven.
+        /// </summary>
+        [When("Night Change: {string} is sold")]
+        public void Sell(PickleContext ctx, string name)
+        {
+            Pawn pawn = Driver.Pawn(ctx, name);
+            Faction buyerFaction = Find.FactionManager.AllFactionsVisible.FirstOrDefault(f =>
+                !f.IsPlayer && !f.HostileTo(Faction.OfPlayer) && f.def.humanlikeFaction);
+            ctx.Require(buyerFaction != null, "the world has no friendly humanlike faction to sell to");
+            Pawn buyer = PawnGenerator.GeneratePawn(PawnKindDefOf.Villager, buyerFaction);
+            pawn.PreTraded(TradeAction.PlayerSells, pawn, buyer);
+            if (pawn.Spawned) pawn.DeSpawn();
+        }
+
+        [When("Night Change: {string} is downed")]
+        public void Down(PickleContext ctx, string name)
+        {
+            Pawn pawn = Driver.Pawn(ctx, name);
+            HealthUtility.DamageUntilDowned(pawn, false);
+            ctx.Assert(pawn.Downed, $"{name} is not downed after the damage: the fixture is broken, not the mod");
+        }
+
+        [When("Night Change: {string} is healed")]
+        public void Heal(PickleContext ctx, string name)
+        {
+            Pawn pawn = Driver.Pawn(ctx, name);
+            foreach (Hediff hediff in pawn.health.hediffSet.hediffs.ToList()) pawn.health.RemoveHediff(hediff);
+            ctx.Assert(!pawn.Downed, $"{name} is still downed after every hediff was removed");
+        }
+
+        /// <summary>
+        /// A fire on the stand's own cell: the job's FailOnBurningImmobile is what the scenario exercises.
+        /// </summary>
+        [When("Night Change: a fire starts on the stand")]
+        public void FireOnStand(PickleContext ctx)
+        {
+            Building_OutfitStand stand = Driver.Stand(ctx);
+            ctx.Assert(FireUtility.TryStartFireIn(stand.Position, Driver.Map(ctx), 1f, null), "the fire did not start on the stand");
+        }
+
+        /// <summary>
+        /// The garment leaves the stand and lands on the floor of the bedroom, as when a player takes it
+        /// out by hand: it still exists, only the ledger no longer finds it where it parked it.
+        /// </summary>
+        [When("Night Change: the parked {string} is taken off the stand")]
+        public void TakeOffStand(PickleContext ctx, string defName)
+        {
+            Building_OutfitStand stand = Driver.Stand(ctx);
+            Apparel apparel = stand.HeldItems.OfType<Apparel>().FirstOrDefault(a => a.def.defName == defName);
+            ctx.Assert(apparel != null, $"the stand does not hold {defName}; it holds: "
+                + string.Join(", ", stand.HeldItems.Select(t => t.def.defName).ToArray()));
+            stand.RemoveApparel(apparel);
+            GenPlace.TryPlaceThing(apparel, stand.Position, stand.Map, ThingPlaceMode.Near);
+            ctx.Assert(apparel.Spawned, $"the {defName} taken off the stand did not land on the floor");
+        }
+
+        /// <summary>
+        /// A wall on the stand's interaction cell, the one cell PathEndMode.InteractionCell can end on.
+        /// The step proves its own fixture: if the stand can still be reached it fails on that line.
+        /// </summary>
+        [When("Night Change: the stand's way is walled up")]
+        public void WallUp(PickleContext ctx)
+        {
+            Building_OutfitStand stand = Driver.Stand(ctx);
+            IntVec3 cell = stand.InteractionCell;
+            Driver.Clear(stand.Map, cell);
+            Driver.SpawnAt(ctx, ThingDefOf.Wall, cell, Rot4.North);
+            stand.Map.regionAndRoomUpdater.TryRebuildDirtyRegionsAndRooms();
+            Pawn probe = stand.Map.mapPawns.FreeColonistsSpawned.FirstOrDefault();
+            ctx.Require(probe != null, "no colonist to probe the path with");
+            ctx.Assert(!probe.CanReach(stand, PathEndMode.InteractionCell, Danger.Deadly),
+                $"the stand is still reachable with a wall at x={cell.x} z={cell.z}: the fixture is broken, not the mod");
+        }
+
+        [When("Night Change: the wall at the stand's way is removed")]
+        public void WallDown(PickleContext ctx)
+        {
+            Building_OutfitStand stand = Driver.Stand(ctx);
+            Thing wall = stand.InteractionCell.GetThingList(stand.Map).FirstOrDefault(t => t.def == ThingDefOf.Wall);
+            ctx.Assert(wall != null, "no wall at the stand's interaction cell to remove");
+            wall.Destroy(DestroyMode.Vanish);
+            stand.Map.regionAndRoomUpdater.TryRebuildDirtyRegionsAndRooms();
+        }
+
         /// <summary>
         /// A raider on the map makes the danger watcher leave StoryDanger.None. The watcher updates
         /// on its own cadence, so the scenario waits ticks and then asserts the danger.

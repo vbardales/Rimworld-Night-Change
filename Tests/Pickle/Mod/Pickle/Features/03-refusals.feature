@@ -88,3 +88,47 @@ Feature: what the mod refuses to do
     And I wait 300 ticks
     Then Night Change: "Alice" is wearing "Apparel_Parka"
     And Night Change: the stand has no borrower
+
+  # A fire on the stand: the swap job carries FailOnBurningImmobile on its target, and the colonist
+  # must not be left stuck in the burning room's wardrobe trip. Added 2026-10-16 (TESTING.md, "fire:
+  # not exercised"). The stand may burn down within the wait; nothing here reads the stand again.
+  Scenario: a burning stand does not make the colonist change
+    Given Night Change: a fire starts on the stand
+    When Night Change: "Alice" goes to bed of their own accord
+    And I wait 300 ticks
+    Then Night Change: "Alice" is not wearing "Apparel_BasicShirt"
+    And no errors were logged
+
+  # Eligible() refuses a downed pawn: carried to bed by someone else, they are not sent to a stand.
+  Scenario: a downed colonist is put to bed in their own clothes
+    Given Night Change: "Alice" is downed
+    When Night Change: "Alice" goes to bed of their own accord
+    And I wait 300 ticks
+    Then Night Change: "Alice" is wearing "Apparel_Parka"
+    And Night Change: the stand has no borrower
+    And no errors were logged
+
+  # Downed overnight: the return trip refuses a downed pawn (nobody walks to a stand crawling), the
+  # ledger stays honest, and the return happens once they can walk again.
+  Scenario: downed in night clothes, the return waits until they are on their feet
+    Given Night Change: "Alice" goes to bed of their own accord
+    And Night Change: "Alice" ends up wearing "Apparel_BasicShirt"
+    And Night Change: "Alice" is downed
+    When Night Change: "Alice" gets up
+    And I set the hour to 12
+    And I wait 600 ticks
+    Then Night Change: "Alice" is wearing "Apparel_BasicShirt"
+    And Night Change: the stand's borrower is "Alice"
+    When Night Change: "Alice" is healed
+    Then Night Change: "Alice" ends up wearing "Apparel_Parka"
+    And no errors were logged
+
+  # A stand the colonist cannot reach is no stand: the outbound change is not chosen, and the
+  # deferred bed job is not lost.
+  Scenario: a blocked path to the stand leaves the colonist in their own clothes
+    Given Night Change: the stand's way is walled up
+    When Night Change: "Alice" goes to bed of their own accord
+    And I wait 600 ticks
+    Then Night Change: "Alice" is wearing "Apparel_Parka"
+    And Night Change: the stand has no borrower
+    And no errors were logged
