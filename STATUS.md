@@ -53,7 +53,7 @@ French lives in `Mod/Languages/French/Keyed/NightChange.xml`, `DefInjected/JobDe
 
 - 2026-09-30, gender-agreement read (session): every French text read. Six Keyed strings agreed with a pawn in the masculine only (`celui`, `il`, `le colon`, `le dormeur`, `propriétaire explicite`); all reworded with no agreement (`la personne`, `l'envoie`, `Choisir qui dort ici`), so no `{PAWN_gender}` switch was needed. Unsure, for Virginie: `portant` for outfit stand, `Choisir qui dort ici` (replaced 2026-10-16 by `Choisir la personne qui se change ici`) as the button label, `habits` vs `tenue`.
 - French review by Virginie: done 2026-10-13, reviewer Virginie, FRENCH_REVIEW.md generated from revision 10ee883 (French texts unchanged since 76f89a3); corrections requested: none recorded, she validated the translation in chat. The English sentence changed in the Steam description at 10ee883 is read with PUBLICATION.md at writeDocs (no separate About review, AUDIT.md 11.j).
-- French review of the four strings changed 2026-10-16 (`NightChange_AssignGizmo`, `AssignGizmoDesc`, `SettingsScope`, `ChangeBackGizmoDesc`): validated by Virginie in chat 2026-10-16, no correction requested; FRENCH_REVIEW.md regenerated on an uncommitted tree, to regenerate once the change is committed so the revision is a commit.
+- French review of the four strings changed 2026-10-16 (`NightChange_AssignGizmo`, `AssignGizmoDesc`, `SettingsScope`, `ChangeBackGizmoDesc`): validated by Virginie in chat 2026-10-16, no correction requested; FRENCH_REVIEW.md regenerated at commit b8d3572.
 
 ## Audit - 2026-09-29 (replaces the 2026-09-13 decision below)
 
