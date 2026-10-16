@@ -70,5 +70,5 @@ Feature: the stand or the borrower goes away
     Then Night Change: "Alice" is wearing "Apparel_BasicShirt"
     And Night Change: the stand's borrower is "Alice"
     And no errors were logged
-    When Night Change: the wall at the stand's way is removed
+    When Night Change: the walls around the stand are removed
     Then Night Change: "Alice" ends up wearing "Apparel_Parka"
