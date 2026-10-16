@@ -77,10 +77,27 @@ Credits and licence: see ATTRIBUTION.md and LICENSE (MIT) in the repository.
 | Index | Shows | Scenario |
 | --- | --- | --- |
 | `0-preview.png` | the Preview | copy of `About/Preview.png` |
-| `1-...` | a bedroom with a stand holding night clothes, colonist walking to it before bed | evening change |
-| `2-...` | the same colonist asleep, day clothes parked on the stand | overnight |
-| `3-...` | the "Set sleeper" and "Change back now" buttons on the stand | stand gizmos |
-| `4-...` | the settings window | Mod options, Night Change |
+| `1-evening-change.png` | Nelim in the nightshirt, lying down at dusk, her parka already on the stand | evening change |
+| `2-overnight.png` | Nelim asleep, eyes closed, the parka still on the stand | overnight |
+| `3-stand-gizmos.png` | the "Set sleeper" and "Change back now" buttons on the stand | stand gizmos |
+| `4-settings.png` | the settings window | Mod options, Night Change |
+| `5-morning-change.png` | Nelim up and wearing the parka again, the nightshirt back on the stand | morning change |
+
+The story is one night: Nelim goes to bed in a cold room, her day clothes wait on the stand, and she puts them on again at dawn. The captures 3 and 4 are interface and carry no subtitle.
+
+### Gallery subtitles
+
+One English line at the bottom of each scene without an interface window, like a film subtitle (`GALLERY.md`, "Sous-titres"). The untouched originals go in `Art/Gallery-clean/` under the same name.
+
+| Index | File | Line |
+| --- | --- | --- |
+| 1 | `1-evening-change.png` | Nelim is in bed. Her parka stays on the stand. |
+| 2 | `2-overnight.png` | The room is cold. She sleeps warm. |
+| 5 | `5-morning-change.png` | Morning. The parka goes back on. |
+
+Cast and look, decided here (`GALLERY.md`: the session directs everything). Nelim is the protagonist and keeps the face, eyes and trousers of the `Nelims-tribe` fixture; hair and expression are not changed for her, except a closed-eye `blink` in scene 2 and a relaxed face in scene 5. The parka is dyed warm orange and the nightshirt pale blue, so the swap reads at a glance; Alice is an optional guest at the door in scene 5, long copper hair, faint smile. No extra mod: vanilla clothes carry the idea, the only mod beyond the minimal set is the fixture's own EyeGenes. Place: `sleeping-nook` of the Sanctuary, torches for the night, never a removed roof.
+
+**Open, not done yet:** `Tests/Pickle/Mod/Pickle/Features/20-gallery.feature` still builds a bedroom in `test-colony` with an invented "Nelim" (Bob hair) and no dye, no `Nelims-tribe`, no Sanctuary place. It must be rewritten to the cast above before any capture is played; no capture exists yet.
 
 ## 3. Dependencies to declare on Steam
 

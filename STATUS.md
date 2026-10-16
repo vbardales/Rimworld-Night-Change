@@ -20,14 +20,14 @@ workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-0
 remaining:
   - blocking (playTests -> shootGallery): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
   - blocking (playTests -> shootGallery): NOT MET - manual tests to validate: fire, downed, killed or sold borrower, garment removed from the stand, blocked path, and every @review capture still to open
-  - blocking (playTests -> shootGallery): defect B, open: with Shift Change, after "Change back now" the sleeper's job is ShiftChange_SwapAtStand (their job, not ours), Alice wears shirt and trousers, the parka stays on the stand and NightChange still names her borrower (ticket B2, 2026-10-14, diag lines in Player.log); not yet known whether that job ends or loops
+  - defect B, closed by ticket B3 (2026-10-16, `b3-button-shiftchange` 1/1): with Shift Change the swap job ShiftChange_SwapAtStand ends on its own (GotoWander at tick 136683, about 700 ticks after the button) and Alice wears the parka; the B2 failure was a state report taken too early
   - blocking (playTests -> shootGallery): the without-Biotech pass (13) cannot run: the test-colony save was made with Biotech and vanilla throws a NullReferenceException (ListerHaulables, Building_Grave.Accepts, ThingFilter.Allows) on load without it; needs another fixture. 12 (with Biotech) is green
-  - unverified: after the 2026-10-15 patch change (see Audit replay) 12 must be replayed alone; raid scenarios green (A2, four raiders), settings 07 and restart chain 09/10 green on earlier runs, RIMMSQOL 08 green (p3 3/3)
+  - unverified: 12 replayed alone after the 2026-10-15 patch change: `d-biotech` 1/1 green (2026-10-16); raid scenarios green (A2, four raiders), settings 07 and restart chain 09/10 green on earlier runs, RIMMSQOL 08 green (p3 3/3)
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
 updated:      2026-10-15, playTests[1.0.0]; audit replayed 1 to 8
-protocols_read_sha: 1397cf3608b1a670fceaf0050eda16021b805fde
+protocols_read_sha: 005d9b2720a85d62a3a31b02c265f3133621ee72
 ---
 
 # Night Change - status
@@ -51,8 +51,9 @@ Stage kept at playTests: the defect found is fixed in the same change, and the t
 
 French lives in `Mod/Languages/French/Keyed/NightChange.xml`, `DefInjected/JobDef/NightChange_Jobs.xml` and `DefInjected/MainButtonDef/NightChange.xml`. No grammar files.
 
-- 2026-09-30, gender-agreement read (session): every French text read. Six Keyed strings agreed with a pawn in the masculine only (`celui`, `il`, `le colon`, `le dormeur`, `propriétaire explicite`); all reworded with no agreement (`la personne`, `l'envoie`, `Choisir qui dort ici`), so no `{PAWN_gender}` switch was needed. Unsure, for Virginie: `portant` for outfit stand, `Choisir qui dort ici` as the button label, `habits` vs `tenue`.
+- 2026-09-30, gender-agreement read (session): every French text read. Six Keyed strings agreed with a pawn in the masculine only (`celui`, `il`, `le colon`, `le dormeur`, `propriétaire explicite`); all reworded with no agreement (`la personne`, `l'envoie`, `Choisir qui dort ici`), so no `{PAWN_gender}` switch was needed. Unsure, for Virginie: `portant` for outfit stand, `Choisir qui dort ici` (replaced 2026-10-16 by `Choisir la personne qui se change ici`) as the button label, `habits` vs `tenue`.
 - French review by Virginie: done 2026-10-13, reviewer Virginie, FRENCH_REVIEW.md generated from revision 10ee883 (French texts unchanged since 76f89a3); corrections requested: none recorded, she validated the translation in chat. The English sentence changed in the Steam description at 10ee883 is read with PUBLICATION.md at writeDocs (no separate About review, AUDIT.md 11.j).
+- French review of the four strings changed 2026-10-16 (`NightChange_AssignGizmo`, `AssignGizmoDesc`, `SettingsScope`, `ChangeBackGizmoDesc`): validated by Virginie in chat 2026-10-16, no correction requested; FRENCH_REVIEW.md regenerated on an uncommitted tree, to regenerate once the change is committed so the revision is a commit.
 
 ## Audit - 2026-09-29 (replaces the 2026-09-13 decision below)
 

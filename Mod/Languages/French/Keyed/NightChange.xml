@@ -2,7 +2,7 @@
 <LanguageData>
 
   <NightChange_ModTitle>Night Change</NightChange_ModTitle>
-  <NightChange_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la prochaine décision de se changer ; un changement de tenue déjà en cours ne redémarre pas. Les réglages sont enregistrés à la fermeture de cette fenêtre.</NightChange_SettingsScope>
+  <NightChange_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la prochaine décision de se changer ; un changement déjà en cours n'est pas relancé. Les réglages sont enregistrés à la fermeture de cette fenêtre.</NightChange_SettingsScope>
 
   <NightChange_SettingInheritOwner>Un portant libre sert la personne qui possède le lit</NightChange_SettingInheritOwner>
   <NightChange_SettingInheritOwnerDesc>Un portant sans propriétaire assigné sert la personne à qui appartient un lit de la même pièce : une chambre ne demande donc aucun réglage. Décochez pour exiger une assignation explicite sur chaque portant.</NightChange_SettingInheritOwnerDesc>
@@ -13,11 +13,11 @@
   <NightChange_SettingColdMargin>Marge de sécurité : {0} °C</NightChange_SettingColdMargin>
   <NightChange_SettingDistance>Distance maximale entre le lit et le portant : {0} cases</NightChange_SettingDistance>
 
-  <NightChange_AssignGizmo>Choisir qui dort ici</NightChange_AssignGizmo>
-  <NightChange_AssignGizmoDesc>Désigne qui se change à ce portant avant de se coucher. Laissé libre, il sert la personne à qui appartient un lit de la même pièce.</NightChange_AssignGizmoDesc>
+  <NightChange_AssignGizmo>Choisir la personne qui se change ici</NightChange_AssignGizmo>
+  <NightChange_AssignGizmoDesc>Désignez qui se change à ce portant avant de se coucher. Laissé libre, il sert la personne à qui appartient un lit de la même pièce.</NightChange_AssignGizmoDesc>
 
   <NightChange_ChangeBackGizmo>Se rhabiller maintenant</NightChange_ChangeBackGizmo>
-  <NightChange_ChangeBackGizmoDesc>Interrompt {0} et l'envoie reprendre ses propres habits.</NightChange_ChangeBackGizmoDesc>
+  <NightChange_ChangeBackGizmoDesc>Interrompre {0} afin que cette personne vienne reprendre ses propres habits.</NightChange_ChangeBackGizmoDesc>
 
   <NightChange_InspectInUse>Contient les habits de {0}</NightChange_InspectInUse>
 

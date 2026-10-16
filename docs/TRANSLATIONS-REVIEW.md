@@ -22,7 +22,7 @@ For the French review by Virginie (TRANSLATIONS.md section 3). Origin = the text
 | `NightChange_SettingColdGuardDesc` | Night clothes replace day clothes rather than layering over them, so a change can cost a colonist their insulation. This compares the two and skips the change when the bedroom is colder than the colonist could stand afterwards. | La tenue de nuit remplace les habits de jour au lieu de se porter par-dessus : le changement peut donc coûter de l'isolation à la personne concernée. Cette option compare les deux et renonce quand la chambre est plus froide que ce que cette personne supporterait ensuite. |
 | `NightChange_SettingColdMargin` | Safety margin: {0} °C | Marge de sécurité : {0} °C |
 | `NightChange_SettingDistance` | Maximum distance from bed to stand: {0} cells | Distance maximale entre le lit et le portant : {0} cases |
-| `NightChange_AssignGizmo` | Set sleeper | Choisir qui dort ici |
+| `NightChange_AssignGizmo` | Set sleeper | Choisir la personne qui se change ici |
 | `NightChange_AssignGizmoDesc` | Choose who changes at this stand before bed. Left unassigned, it serves whoever owns a bed in the same room. | Désigne qui se change à ce portant avant de se coucher. Laissé libre, il sert la personne à qui appartient un lit de la même pièce. |
 | `NightChange_ChangeBackGizmo` | Change back now | Se rhabiller maintenant |
 | `NightChange_ChangeBackGizmoDesc` | Interrupt {0} so they come and change back into their own clothes. | Interrompt {0} et l'envoie reprendre ses propres habits. |
@@ -31,6 +31,6 @@ For the French review by Virginie (TRANSLATIONS.md section 3). Origin = the text
 ## Doubts for the reviewer
 
 - `portant` for "outfit stand" (vanilla French name to confirm).
-- `Choisir qui dort ici` for the button "Set sleeper" (reworded to avoid a masculine noun).
+- `Choisir la personne qui se change ici` for the button "Set sleeper" (reworded to avoid a masculine noun).
 - `habits` versus `tenue` (both used).
 - Gender agreement: no `{PAWN_gender}` switch was needed, every agreeing text was reworded (see `STATUS.md`, Translation audit).
