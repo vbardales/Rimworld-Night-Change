@@ -197,9 +197,19 @@ namespace NightChange.PickleSteps
         [Then("Night Change: all {int} keys of the mod resolve in the language of the pass")]
         public void KeysResolve(PickleContext ctx, int expected)
         {
-            LoadedLanguage english = LanguageDatabase.AllLoadedLanguages.FirstOrDefault(l => l.folderName == "English");
-            ctx.Require(english != null, "the English language is not loaded");
-            List<string> keys = english.keyedReplacements.Keys.Where(k => k.StartsWith("NightChange_")).ToList();
+            // The English keys are read from the mod's own English Keyed files: in a French pass Rimworld
+            // does not keep English's replacements in memory (ticket F1, 2026-10-17: 0 keys found).
+            ModContentPack pack = LoadedModManager.RunningModsListForReading.FirstOrDefault(m => m.PackageId == "nelim.nightchange");
+            ctx.Require(pack != null, "the mod nelim.nightchange is not loaded");
+            List<string> keys = new List<string>();
+            foreach (string file in System.IO.Directory.GetFiles(System.IO.Path.Combine(pack.RootDir, "Languages/English/Keyed"), "*.xml"))
+            {
+                foreach (System.Xml.Linq.XElement element in System.Xml.Linq.XDocument.Load(file).Root.Elements())
+                {
+                    if (element.Name.LocalName.StartsWith("NightChange_")) keys.Add(element.Name.LocalName);
+                }
+            }
+
             ctx.Assert(keys.Count == expected, $"the English file declares {keys.Count} NightChange keys, expected {expected}");
             List<string> missing = keys.Where(k => !LanguageDatabase.activeLanguage.HaveTextForKey(k)).ToList();
             ctx.Assert(missing.Count == 0,
