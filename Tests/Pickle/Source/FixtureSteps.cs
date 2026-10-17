@@ -337,6 +337,18 @@ namespace NightChange.PickleSteps
         {
             Building_OutfitStand stand = Driver.Stand(ctx);
             Map map = stand.Map;
+            // A colonist who has just changed stands on the stand's own cell (it is passable): walled in
+            // with it, they would already be there. Step them back to the bedroom's door side first.
+            foreach (Pawn standing in map.mapPawns.FreeColonistsSpawned.ToList())
+            {
+                if (standing.Position.DistanceTo(stand.Position) < 2.5f)
+                {
+                    standing.Position = Driver.Cell(Driver.Room(ctx), 3, 1);
+                    standing.Notify_Teleported();
+                    standing.jobs?.EndCurrentJob(JobCondition.InterruptForced);
+                }
+            }
+
             foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(stand).ToList())
             {
                 if (cell.GetThingList(map).Any(t => t is Building_Bed)) continue;
