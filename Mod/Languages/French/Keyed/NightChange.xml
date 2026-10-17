@@ -5,7 +5,7 @@
   <NightChange_SettingsScope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la prochaine décision de se changer ; un changement déjà en cours n'est pas relancé. Les réglages sont enregistrés à la fermeture de cette fenêtre.</NightChange_SettingsScope>
 
   <NightChange_SettingInheritOwner>Un portant libre sert la personne qui possède le lit</NightChange_SettingInheritOwner>
-  <NightChange_SettingInheritOwnerDesc>Un portant sans propriétaire assigné sert la personne à qui appartient un lit de la même pièce : une chambre ne demande donc aucun réglage. Désactiver cette option pour exiger une assignation explicite sur chaque portant.</NightChange_SettingInheritOwnerDesc>
+  <NightChange_SettingInheritOwnerDesc>Un portant sans personne assignée sert la personne à qui appartient un lit de la même pièce : une chambre ne demande donc aucun réglage. Désactiver cette option pour exiger une assignation explicite sur chaque portant.</NightChange_SettingInheritOwnerDesc>
 
   <NightChange_SettingColdGuard>Refuser le changement si la chambre est trop froide</NightChange_SettingColdGuard>
   <NightChange_SettingColdGuardDesc>La tenue de nuit remplace les habits de jour au lieu de se porter par-dessus : le changement peut donc coûter de l'isolation à la personne concernée. Cette option compare les deux et renonce quand la chambre est plus froide que ce que cette personne supporterait ensuite.</NightChange_SettingColdGuardDesc>
