@@ -64,3 +64,11 @@ The audits of 2026-09-13 and 2026-09-29, the corrections of 2026-09-13 and the h
 ## Preview
 
 2026-10-27: Preview regenerated from the new `Art/Preview.config.json` (commit 4899983), validated by Virginie in chat.
+
+## Tickets in queue (2026-10-27, tree at a0efa01)
+
+Owner local_ac13bedc-cde4-419c-a942-953b2964a34c. On RUN_DONE read summary.json then junit.xml of each Inbox folder.
+- 20261027-013441-402-70f3: 08-rimmsqol-shortcut, map avec-rimmsqol, Tests/Pickle/Inbox/g1-rimmsqol
+- 20261027-013442-146-9f44: 11-shift-change, map avec-shiftchange, Tests/Pickle/Inbox/g2-shiftchange
+- 20261027-013443-125-6df7: 12-biotech, map sans-facultatifs, Tests/Pickle/Inbox/g3-biotech
+Meanwhile (no Mod/ or Source/ change): add docs/runs/history.md lines for E1-E3 and F1/F2; 8.m code review (Opus sub-agent) once the tickets are green; 13 without Biotech needs another fixture; tested_on empty.
