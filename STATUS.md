@@ -60,3 +60,7 @@ French lives in `Mod/Languages/French/Keyed/NightChange.xml`, `DefInjected/JobDe
 ## Older audits
 
 The audits of 2026-09-13 and 2026-09-29, the corrections of 2026-09-13 and the historical sweep notes are in `docs/runs/status-archive-2026-10-16.md`.
+
+## Preview
+
+2026-10-27: Preview regenerated from the new `Art/Preview.config.json` (commit 4899983), validated by Virginie in chat.
