@@ -28,7 +28,7 @@ remaining:
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
 updated:      2026-10-17, playTests[1.0.0]; audit replayed 1 to 8
-protocols_read_sha: 3c467d598ccbea456113b1795f6fadc605af5de8
+protocols_read_sha: 43dd90d4b7873c500347fba1be01275a48d5795b
 ---
 # Night Change - status
 
