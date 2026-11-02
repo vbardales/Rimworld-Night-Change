@@ -158,7 +158,10 @@ namespace NightChange
 
             try
             {
-                if (NightChangeTracker.Current?.LedgerFor(pawn) == null)
+                // A ledger on another map (the pawn left in a caravan) no longer protects anything:
+                // the optimizer must dress the pawn there, and JobGiver_ChangeBack will not fire.
+                CompNightStand comp = NightChangeTracker.Current?.LedgerFor(pawn);
+                if (comp == null || comp.parent.Map != pawn.Map)
                 {
                     return true;
                 }

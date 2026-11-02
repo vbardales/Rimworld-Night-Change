@@ -131,13 +131,27 @@ namespace NightChange
             foreach (Apparel apparel in wear)
             {
                 stand.RemoveApparel(apparel);
-                pawn.apparel.Wear(apparel, dropReplacedApparel: false);
+                // A worn piece that conflicts and is not in the ledger (put on overnight) is dropped
+                // on the floor, never destroyed.
+                pawn.apparel.Wear(apparel, dropReplacedApparel: true);
             }
 
+            // The stand may refuse a garment (filter, room): it goes on the floor, not nowhere, and
+            // stays out of the ledger.
+            List<Apparel> stored = new List<Apparel>();
             foreach (Apparel apparel in park)
             {
-                stand.AddApparel(apparel);
+                if (stand.AddApparel(apparel))
+                {
+                    stored.Add(apparel);
+                }
+                else
+                {
+                    GenPlace.TryPlaceThing(apparel, pawn.Position, pawn.Map, ThingPlaceMode.Near);
+                }
             }
+
+            park = stored;
 
             if (returning)
             {

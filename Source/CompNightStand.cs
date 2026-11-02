@@ -126,6 +126,19 @@ namespace NightChange
 
         public void NotifyUndressed()
         {
+            // Night clothes still on a living borrower (stand destroyed, ledger closed) lose the
+            // forced flag, or the optimizer never takes them off.
+            if (borrower != null && !borrower.Dead && borrower.outfits != null && borrower.apparel != null)
+            {
+                foreach (Apparel apparel in taken)
+                {
+                    if (borrower.apparel.WornApparel.Contains(apparel))
+                    {
+                        borrower.outfits.forcedHandler.SetForced(apparel, forced: false);
+                    }
+                }
+            }
+
             NightChangeTracker.Current?.Unregister(borrower);
             borrower = null;
             parked.Clear();

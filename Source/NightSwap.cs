@@ -68,6 +68,17 @@ namespace NightChange
                 }
             }
 
+            // A locked piece stays on the pawn and cannot be parked: drop what cannot be worn with it,
+            // or the wear would destroy that piece.
+            plan.ToWear.RemoveAll(w => pawn.apparel.WornApparel.Any(worn =>
+                pawn.apparel.IsLocked(worn)
+                && !ApparelUtility.CanWearTogether(w.def, worn.def, pawn.RaceProps.body)));
+
+            if (plan.ToWear.Count == 0)
+            {
+                return null;
+            }
+
             plan.ToPark.AddRange(pawn.apparel.WornApparel.Where(a => !pawn.apparel.IsLocked(a)));
             return plan;
         }
