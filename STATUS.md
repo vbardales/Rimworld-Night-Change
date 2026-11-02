@@ -27,7 +27,7 @@ remaining:
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
-updated:      2026-10-17, playTests[1.0.0]; audit replayed 1 to 8
+updated:      2026-11-02, playTests[1.0.0]; audit replayed 1 to 8 (first open 8.f: 13 without Biotech)
 protocols_read_sha: b6448ff1a710b27d7c79c1365e82f21949aa2ee0
 ---
 # Night Change - status
