@@ -18,7 +18,7 @@ showcase:     complete
 tested_on:
 workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-09-23)
 remaining:
-  - blocking (playTests -> shootGallery): NOT MET - conditional scenarios not yet played: 08 (RIMMSQOL), 11 (Shift Change), 12 (Biotech present), 13 (without Biotech); all six passes of Tests/Pickle/README.md are unrun
+  - blocking (playTests -> shootGallery): NOT MET - conditional scenario 13 (without Biotech) not played (no fixture, see below); 08 (RIMMSQOL) g1 3/3, 11 (Shift Change) g2 2/2, 12 (Biotech) g3 1/1 green 2026-10-27 (Tests/Pickle/Inbox, to sort into Evidence); the six passes of Tests/Pickle/README.md still to tick off from these results
   - blocking (playTests -> shootGallery): NOT MET - the former manual tests are now Pickle scenarios written 2026-10-16 (03: burning stand, downed before bed, downed overnight, blocked path outbound; 06: borrower killed, sold, parked garment taken off the stand, blocked path in the morning), E1 `e1-emergencies` 6/9 green (fire, downed x2, killed, parked garment, gizmo capture); the 3 red were fixture faults. E2 `e2-emergencies` 2/3 green (blocked path outbound, sold); morning blocked path red on its fixture (colonist standing on the stand cell), fixed 2026-10-17, replay E3 `e3-emergencies` (id 20261017-161442-172-25ff) 1/1 green 2026-10-17, so all 09 emergency scenarios now green (evidence Tests/Pickle/Evidence/e3-emergencies). English gizmo bar capture accepted 2026-10-16 (labels readable, unclipped); French 07/14 captures accepted (F1 4/5; the red was the key-count step reading English from memory, fixed), key resolution replay F2 `f2-french` (id 20261017-162157-772-55f4) 1/1 green 2026-10-17 (evidence Tests/Pickle/Evidence/f2-french). Fire note: DangerWatcher counts hostiles only, so a fire elsewhere does not gate the change; only a burning stand fails the job (FailOnBurningImmobile)
   - @review captures opened 2026-10-16 by the session (07 EN/FR, 08, 14 EN/FR, runs of 2026-09-29/30): settings page accepted (no raw key, no clipping, margin slider shown with the guard on, same page by Mod options, shortcut and RIMMSQOL); inspect line accepted ("Holding Alice's clothes" / "Contient les habits d'Alice"). Gizmo bar was NOT visible in the 14 capture (screenshot mode hides it) and all captures predate the 2026-10-16 string rewording: 14 now takes a plain capture of the gizmo bar, replayed in E1 (English); French 07/14 to replay in a small French ticket
   - defect B, closed by ticket B3 (2026-10-16, `b3-button-shiftchange` 1/1): with Shift Change the swap job ShiftChange_SwapAtStand ends on its own (GotoWander at tick 136683, about 700 ticks after the button) and Alice wears the parka; the B2 failure was a state report taken too early
@@ -28,7 +28,7 @@ remaining:
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
 updated:      2026-10-17, playTests[1.0.0]; audit replayed 1 to 8
-protocols_read_sha: 43dd90d4b7873c500347fba1be01275a48d5795b
+protocols_read_sha: b6448ff1a710b27d7c79c1365e82f21949aa2ee0
 ---
 # Night Change - status
 
@@ -65,10 +65,6 @@ The audits of 2026-09-13 and 2026-09-29, the corrections of 2026-09-13 and the h
 
 2026-10-27: Preview regenerated from the new `Art/Preview.config.json` (commit 4899983), validated by Virginie in chat.
 
-## Tickets in queue (2026-10-27, tree at a0efa01)
+## Tickets (2026-10-27, tree at a0efa01), results read 2026-11-02
 
-Owner local_ac13bedc-cde4-419c-a942-953b2964a34c. On RUN_DONE read summary.json then junit.xml of each Inbox folder.
-- 20261027-013441-402-70f3: 08-rimmsqol-shortcut, map avec-rimmsqol, Tests/Pickle/Inbox/g1-rimmsqol
-- 20261027-013442-146-9f44: 11-shift-change, map avec-shiftchange, Tests/Pickle/Inbox/g2-shiftchange
-- 20261027-013443-125-6df7: 12-biotech, map sans-facultatifs, Tests/Pickle/Inbox/g3-biotech
-Meanwhile (no Mod/ or Source/ change): add docs/runs/history.md lines for E1-E3 and F1/F2; 8.m code review (Opus sub-agent) once the tickets are green; 13 without Biotech needs another fixture; tested_on empty.
+All three green: `g1-rimmsqol` (08) 3/3, `g2-shiftchange` (11) 2/2, `g3-biotech` (12) 1/1, in `Tests/Pickle/Inbox/`. Still to do: sort Inbox into `Evidence/` (`scripts/Prune-Evidence.ps1 -Mod NightChange`, read `docs/TEST-EVIDENCE.md`); 13 without Biotech needs another fixture (ask NPT); 8.m code review (Opus sub-agent) now that 08/11/12 are green; `tested_on` empty.
