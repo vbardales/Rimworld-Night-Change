@@ -26,6 +26,7 @@ remaining:
   - unverified: 12 replayed alone after the 2026-10-15 patch change: `d-biotech` 1/1 green (2026-10-16); raid scenarios green (A2, four raiders), settings 07 and restart chain 09/10 green on earlier runs, RIMMSQOL 08 green (p3 3/3)
   - unverified: Outfit Stands Plus (loadAfter) cannot be staged: Workshop item 3545172389 was taken down, the fork 3724311713 has no established packageId
   - unverified: logs, EN/FR UI, MainButtons shortcut by RIMMSQOL, new game and existing save, in a real game
+  - 8.m code review 2026-11-02 at f70d942 (Opus sub-agent), code_review_sha NOT set until fixed or accepted: HIGH JobDriver_ChangeAtNightStand.cs:134 Wear(dropReplacedApparel:false) deletes a conflicting worn piece (night raid, flak vest); MEDIUM NightSwap.cs:59 ForDressing ignores locked worn apparel; JobDriver:139 AddApparel result ignored (garment orphaned); CompNightStand.cs:127 NotifyUndressed leaves SetForced(true) on night clothes after stand destroyed; HarmonyPatches.cs:161 caravan keeps ledger, pawn stays in pyjamas on another map; LOW CompNightStand.cs:109 Change back now no-op during Sleep hours or cooldown, HarmonyPatches.cs:107 stale LayDown after failed inner StartJob, NightChangeTracker.cs:25 static Current not cleared
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
 updated:      2026-11-02, playTests[1.0.0]; audit replayed 1 to 8 (first open 8.f: 13 without Biotech)
 protocols_read_sha: b6448ff1a710b27d7c79c1365e82f21949aa2ee0
