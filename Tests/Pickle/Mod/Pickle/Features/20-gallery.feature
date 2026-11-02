@@ -7,6 +7,10 @@
 # bedroom and the stand, no interface, except the two interface captures (stand gizmos, settings).
 #
 # Played in the minimal pass (wsl-deps.sans-facultatifs.map) only.
+@requires:nelim.pickletools.inspecttabs
+@requires:nelim.pickletools.screenshotmode
+@requires:nelim.pickletools.colonistrace
+@requires:nelim.pickletools.screenshotstudio
 Feature: the gallery captures of the evening, the night and the morning
 
   Background:

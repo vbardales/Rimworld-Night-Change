@@ -6,6 +6,7 @@ Functional scenarios: `TEST_SCENARIOS.md` (18 rows, manual originals, none run b
 
 - `dotnet build Tests/NightChange.Tests.csproj -c Release --nologo`
 - `build/tests/NightChange.Tests.exe "<RimWorld Managed dir>" <tmp dir>` (13 assertions)
+  Run by hand, not by `scripts/Run-UnitTests.ps1`: the exe takes two arguments (Managed dir and a temp output dir), which the shared script cannot pass.
 - `powershell -File Tests/Check-Xml.ps1`
 - `scripts/Check-DefInjected.ps1 -TransMod <folder>/Mod` (monorepo script)
 

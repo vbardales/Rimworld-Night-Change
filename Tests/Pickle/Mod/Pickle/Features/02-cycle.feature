@@ -9,6 +9,7 @@
 # became of it. Waits are in ticks, in slices, so a paused game is unpaused.
 #
 # Played in every pass, in both languages (nothing here spells a translated word).
+@requires:nelim.pickletools.inspecttabs @requires:nelim.pickletools.keyedclick
 Feature: the evening change and the morning return
 
   Background:

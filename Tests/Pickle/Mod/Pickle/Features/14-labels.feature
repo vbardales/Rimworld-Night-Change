@@ -6,7 +6,7 @@
 # A capture in developer mode shows a key missing from the active language as accented gibberish; the
 # first scenario asks the language itself, so it does not depend on a capture. The captures are what a
 # person reads for clipping and wrong paragraph breaks.
-@review @requires:nelim.pickletools.screenshotmode
+@review @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.inspecttabs
 Feature: the text is in the language of the pass
 
   Scenario: every key of the mod resolves

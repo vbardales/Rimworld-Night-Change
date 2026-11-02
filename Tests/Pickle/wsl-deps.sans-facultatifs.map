@@ -6,3 +6,5 @@
 nelim.pickletools.screenshotmode path:PickleTools/ScreenshotMode/Mod
 nelim.pickletools.inspecttabs path:PickleTools/InspectTabs/Mod
 nelim.pickletools.keyedclick path:PickleTools/KeyedClick/Mod
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.colonistrace path:PickleTools/ColonistRace/Mod
