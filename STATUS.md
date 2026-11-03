@@ -71,3 +71,5 @@ The audits of 2026-09-13 and 2026-09-29, the corrections of 2026-09-13 and the h
 All three green: `g1-rimmsqol` (08) 3/3, `g2-shiftchange` (11) 2/2, `g3-biotech` (12) 1/1, in `Tests/Pickle/Inbox/`. Still to do: sort Inbox into `Evidence/` (`scripts/Prune-Evidence.ps1 -Mod NightChange`, read `docs/TEST-EVIDENCE.md`); 13 without Biotech needs another fixture (ask NPT); 8.m code review (Opus sub-agent) now that 08/11/12 are green; `tested_on` empty.
 
 Ticket 20261102-192009-749-04b9 (tree cfba5a0, owner local_1282d52c): filter 02-cycle,03-refusals,04-assignment,05-persistence,06-departure, map sans-facultatifs, English, `Tests/Pickle/Inbox/h1-review-fixes`. Meanwhile: nothing touches `Mod/` or `Source/`. Waiting also for the no-Biotech fixture (NPT ticket 8c91).
+
+2026-11-03: resumed (NiC). Preview re-rendered, identical to committed. Evidence prune dry run: Inbox empty, 5.8 MB over 2 MB target, only f1-french GO; apply and RELEASE.md conditions wait for ticket 04b9 result (TM relays it). No-Biotech fixture: NPT ticket 8c91, TM relays.
