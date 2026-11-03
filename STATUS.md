@@ -29,7 +29,7 @@ remaining:
   - 8.m code review 2026-11-02 at f70d942 (Opus sub-agent): the HIGH and the 4 MEDIUM fixed in cfba5a0 (Wear drops replaced apparel, locked pieces filtered in ForDressing, refused garment placed on floor, forced flag cleared in NotifyUndressed, optimizer runs when ledger is on another map); replay ticket 20261102-192009-749-04b9 (02-06, h1-review-fixes) queued; 3 LOW left open (Change back now no-op in sleep hours, stale LayDown, tracker Current not cleared); code_review_sha to set to cfba5a0 (or HEAD) once the replay is green. Findings: HIGH JobDriver_ChangeAtNightStand.cs:134 Wear(dropReplacedApparel:false) deletes a conflicting worn piece (night raid, flak vest); MEDIUM NightSwap.cs:59 ForDressing ignores locked worn apparel; JobDriver:139 AddApparel result ignored (garment orphaned); CompNightStand.cs:127 NotifyUndressed leaves SetForced(true) on night clothes after stand destroyed; HarmonyPatches.cs:161 caravan keeps ledger, pawn stays in pyjamas on another map; LOW CompNightStand.cs:109 Change back now no-op during Sleep hours or cooldown, HarmonyPatches.cs:107 stale LayDown after failed inner StartJob, NightChangeTracker.cs:25 static Current not cleared
   - feature: gallery captures (shootGallery); PUBLICATION.md written 2026-10-13, its gallery table is a plan
 updated:      2026-11-02, playTests[1.0.0]; audit replayed 1 to 8 (first open 8.f: 13 without Biotech)
-protocols_read_sha: b6448ff1a710b27d7c79c1365e82f21949aa2ee0
+protocols_read_sha: 83af834fe5413357e786cce251946f6980d9b421
 ---
 # Night Change - status
 
