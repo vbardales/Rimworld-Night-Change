@@ -41,3 +41,6 @@ evidence/
 
 # Local Windows folder icons (derived from Mod/About/Preview.png); never shipped.
 *.ico
+
+# Pickle fixture saves (10 MB, from PickleTools/Tests/Pickle/Fixtures; copied in, not versioned)
+Tests/Pickle/Mod/Pickle/Fixtures/*.rws

@@ -8,7 +8,7 @@
 Feature: Night Change without Biotech
 
   Scenario: no kid stand, no error, and the ordinary stand works
-    Given the save "test-colony" is loaded
+    Given the save "nobiotech-colony" is loaded
     Then mod "Ludeon.RimWorld.Biotech" is not loaded
     And no def "Building_KidOutfitStand" exists
     And def "Building_OutfitStand" was patched by mod "Night Change"
