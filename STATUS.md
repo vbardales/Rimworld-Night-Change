@@ -14,6 +14,7 @@ licence_at:   LICENSE and Mod/LICENSE, MIT, copyright Nelim 2026; design debt do
 upstream_mod_remotes:
   - https://github.com/beverage/shift-change
 dependencies: declared
+workshop_required_items: n/a, 1.0.0 not released yet (item private, prepublished 0.1.0); owner adds Harmony as Required item at the 1.0.0 release (2026-11-10)
 showcase:     complete
 tested_on:
 workshop:     3806765493 (prepublished 0.1.0, item private; ID file dated 2026-09-23)
@@ -53,9 +54,9 @@ Stage kept at playTests: defect found fixed in same change, transition out of pl
 French lives in `Mod/Languages/French/Keyed/NightChange.xml`, `DefInjected/JobDef/NightChange_Jobs.xml` and `DefInjected/MainButtonDef/NightChange.xml`. No grammar files.
 
 - 2026-09-30, gender-agreement read (session): every French text read. Six Keyed strings agreed with pawn in masculine only (`celui`, `il`, `le colon`, `le dormeur`, `propriétaire explicite`); all reworded with no agreement (`la personne`, `l'envoie`, `Choisir qui dort ici`), so no `{PAWN_gender}` switch needed. Unsure, for Virginie: `portant` for outfit stand, `Choisir qui dort ici` (replaced 2026-10-16 by `Choisir la personne qui se change ici`) as button label, `habits` vs `tenue`.
-- French review by Virginie: done 2026-10-13, reviewer Virginie, FRENCH_REVIEW.md generated from revision 10ee883 (French texts unchanged since 76f89a3); corrections requested: none recorded, she validated translation in chat. English sentence changed in Steam description at 10ee883 read with PUBLICATION.md at writeDocs (no separate About review, AUDIT.md 11.j).
-- French review of four strings changed 2026-10-16 (`NightChange_AssignGizmo`, `AssignGizmoDesc`, `SettingsScope`, `ChangeBackGizmoDesc`): validated by Virginie in chat 2026-10-16, no correction requested; FRENCH_REVIEW.md regenerated at commit b8d3572.
-- 2026-10-17 ChatGPT review (review-translation): `NightChange_SettingInheritOwnerDesc` ("Décochez" to "Désactiver cette option") and `NightChange_AssignGizmoDesc` ("Désignez qui" to "Choisir la personne qui") applied, Virginie said "applique ce qui est pertinent"; `ChangeBackGizmoDesc` ("remettre ses habits") not applied, taste only. FRENCH_REVIEW.md regenerated at fb98575. 2026-10-17 second pass: `SettingInheritOwnerDesc` "propriétaire assigné" to "personne assignée" applied; `ChangeBackGizmoDesc` habits to vêtements not applied (inspect line says habits, would disagree).
+- French review by Virginie: done 2026-10-13, reviewer Virginie, TRANSLATION_REVIEW.md generated from revision 10ee883 (French texts unchanged since 76f89a3); corrections requested: none recorded, she validated translation in chat. English sentence changed in Steam description at 10ee883 read with PUBLICATION.md at writeDocs (no separate About review, AUDIT.md 11.j).
+- French review of four strings changed 2026-10-16 (`NightChange_AssignGizmo`, `AssignGizmoDesc`, `SettingsScope`, `ChangeBackGizmoDesc`): validated by Virginie in chat 2026-10-16, no correction requested; TRANSLATION_REVIEW.md regenerated at commit b8d3572.
+- 2026-10-17 ChatGPT review (review-translation): `NightChange_SettingInheritOwnerDesc` ("Décochez" to "Désactiver cette option") and `NightChange_AssignGizmoDesc` ("Désignez qui" to "Choisir la personne qui") applied, Virginie said "applique ce qui est pertinent"; `ChangeBackGizmoDesc` ("remettre ses habits") not applied, taste only. TRANSLATION_REVIEW.md regenerated at fb98575. 2026-10-17 second pass: `SettingInheritOwnerDesc` "propriétaire assigné" to "personne assignée" applied; `ChangeBackGizmoDesc` habits to vêtements not applied (inspect line says habits, would disagree).
 
 
 ## Older audits
@@ -83,3 +84,5 @@ Fixture `nobiotech-colony.rws` is git-ignored here on purpose; source of truth i
 2026-11-03: ticket 5d5a (h2-review-fixes) exit=1: 15 scenarios, 14 green (04 reassigned overnight, 05 x3, 06 x5 incl. borrower killed/sold/banished, stand destroyed, blocked path in the morning), 1 red: 06 "the parked day clothes are taken off the stand overnight": `Step 'And I wait 900 ticks' timed out after 5s` (360 ticks played), a step timeout, not an assertion failure. Replay alone: ticket 20261103-210832-267-a13e (filter `06-departure::parked day clothes`, map wsl-deps.sans-facultatifs.map, English, Inbox/h3-parked-clothes). `code_review_sha` still unset until it is green. Meanwhile: nothing touches `Mod/` or `Source/`.
 
 2026-11-10: resumed (NiC). Protocols read at 46fbda72. Preview re-rendered with new-format Preview.config.json (old render overlapped echo and title; new one clear), committed with Art/Gallery/0-preview.png and ModIcon.png. Ticket a13e (h3-parked-clothes): Inbox holds only Player.log and no-report.txt (launcher exit 255), no result: refile `06-departure::parked day clothes` unless TM relays one. `code_review_sha` still unset. Inbox h1/h2/h3/stalled not yet triaged (AGENTS.md Inbox lifecycle).
+
+2026-11-10: replay-audit: 4.g workshop_required_items recorded n/a (not released yet, owner decision), 6.f review file renamed to TRANSLATION_REVIEW.md. First open now 8.c (ticket a13e no report), 8.f, 8.l, 8.m. Stage unchanged.
