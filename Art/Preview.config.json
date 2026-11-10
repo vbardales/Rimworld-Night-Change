@@ -1,23 +1,14 @@
 {
   "panel": {
     "title": "Night Change",
-    "titleSize": 48,
-    "titleParts": [{ "text": "Night Change" }],
-    "suffix": "",
-    "tag": "",
-    "tagInline": true,
-    "copyLines": [
-      "Colonists change into night clothes",
-      "on their way to bed."
-    ]
+    "titleParts": [
+      { "text": "Night Change" }
+    ],
+    "description": "Colonists change into night clothes on their way to bed."
   },
-  "backgroundFile": "Preview-source.png",
-  "echo": {
-    "file": "echo-preview.png"
-  },
-  "icon": {
-    "file": "ModIcon-source.png"
-  },
+  "background": { "file": "Preview-source.png" },
+  "icon": { "file": "ModIcon-source.png" },
+  "echo": { "file": "echo-preview.png" },
   "palette": {
     "veil": "#081323",
     "inkPrimary": "#F3EFE7",
